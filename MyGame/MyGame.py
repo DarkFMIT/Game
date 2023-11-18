@@ -51,7 +51,7 @@ class Screen(Game):
         return [tmp_x, tmp_y]
     
     "Вӑйӑ хирӗнчи кликпа ромб вырӑнне шайлаштарма май парать"
-    def get_romb(points):
+    def get_romb(self, points):
         x = points[0]
         y = points[1]
         if (x // 60 + y // 30) % 2 == 0:
@@ -85,25 +85,25 @@ class Screen(Game):
         return [x_return, y_return]
     
     "Функци эпир пуснӑ ромбран уйӑрать, тепӗр хут кӑшкӑрсан, уйӑрӑлӑва пуҫтарать."
-    def mark_plate(pos):
-        global x, y, prev_x, prev_y, game, Sc, position
+    def mark_plate(self, pos):
+        global x, y, prev_x, prev_y, game, position
         points = [0, 0]
-        points[0] = pos[0] - Sc.X_glob
-        points[1] = pos[1] - Sc.Y_glob
-        points = Sc.get_romb(points)
+        points[0] = pos[0] - self.X_glob
+        points[1] = pos[1] - self.Y_glob
+        points = self.get_romb(points)
         if points[0] == prev_x and points[1] == prev_y:
             prev_x = -2
             prev_y = -2
-            Sc.update_window()
+            self.update_window()
         else:
             prev_x = points[0]
             prev_y = points[1]
-            x = points[0] * 60 + Sc.X_glob
-            y = points[1] * 30 + Sc.Y_glob
+            x = points[0] * 60 + self.X_glob
+            y = points[1] * 30 + self.Y_glob
             print(points)
-            Sc.update_window()
+            self.update_window()
             if game.all_plates[points[0]][points[1]] != 1:
-                position = pygame.draw.lines(Sc.screen, (0,0,0), True,
+                position = pygame.draw.lines(self.screen, (0,0,0), True,
                     [[x + 60, y], [x + 120, y + 30], [x + 60, y + 60], [x, y + 30]], 2)
 
 game = Game()
