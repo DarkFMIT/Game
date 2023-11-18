@@ -8,8 +8,8 @@ X_glob = 0
 Y_glob = 0
 pygame.init()
 screen = pygame.display.set_mode((1060, 600))
-grass = pygame.image.load(".\Game\MyGame\grass.jpg")
-house = pygame.image.load(".\Game\MyGame\house.png")
+grass = pygame.image.load(".\MyGame\grass.jpg")
+house = pygame.image.load(".\MyGame\house.png")
 objects_on_screen = {}
 objects = {}
 objects['house'] = house

@@ -15,7 +15,7 @@ class Screen(Game):
     X_glob = 0
     Y_glob = 0
     screen = pygame.display.set_mode((1060, 600))
-    grass = pygame.image.load(".\Game\MyGame\grass.jpg")
+    grass = pygame.image.load(".\MyGame\grass.jpg")
     def update_window(self):
         self.screen.blit(self.grass, (self.X_glob, self.Y_glob))
         for key in self.already_bought.keys():
