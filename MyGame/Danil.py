@@ -2,32 +2,46 @@ import pygame
 pygame.init()
 class Game:
         time = 0
-        money = 200000
-        all_plates = [[0 for i in range(60)] for i in range(60)]
+        money = 20
+        all_plates = [[0 for i in range(90)] for i in range(90)]
         all_plates[0][0] = 1
         def buy(self):
                 points = self.get_romb(self.coords)
                 if not(self.game.all_plates[points[0]][points[1]] in self.dopusc):
-                     return 0
+                    self.can_not_build()
+                    return 0
                 if self.game.money < self.prise:
-                     return 1
+                    self.need_more_money(self.prise - self.money)
+                    return 1
+                
                 self.money -= self.prise
-                coords = self.coords
                 self.game.all_plates[points[0]][points[1]] = self       
+        
         def randTick(self):
                 self.time += 1
+
+        def need_more_money(self, money):
+            pass
+        
+        def can_not_build():
+            pass
+        
+        def buf_debaf(self):
+            pass
 
 class Screen(Game):
     X_glob = 0
     Y_glob = 0
-    screen = pygame.display.set_mode((1060, 600))
-    grass = pygame.image.load(".\MyGame\grass_grid.jpg")
+    Size = [1060, 600]
+    screen = pygame.display.set_mode(Size)
+    grass = pygame.image.load(".\MyGame\map.png")
+    Size_map = [3600, 2400]
 
     "Экран ҫӗнетни. Вӑйӑ хирне таврӑнмалла"    
     def update_window(self):
         self.screen.blit(self.grass, (self.X_glob, self.Y_glob))
-        for i in range(52):
-             for j in range(42):
+        for i in range(80):
+             for j in range(60):
                   something = self.all_plates[j][i]
                   if type(something) != int:
                        self.screen.blit(something.type, (something.coords[0], something.coords[1] - 140))
@@ -37,18 +51,18 @@ class Screen(Game):
     def move(self, moving):
         tmp_x = self.X_glob
         tmp_y = self.Y_glob
-        if self.X_glob + moving[0] <= 0 and self.X_glob + moving[0] >= 1060 - 2500:
+        if self.X_glob + moving[0] <= 0 and self.X_glob + moving[0] >= self.Size[0] - self.Size_map[0]:
             self.X_glob += moving[0]
         if self.X_glob > 0:
               self.X_glob = 0
-        if self.X_glob < 1060 - 2500:
-              self.X_glob = 1060 - 2500
-        if self.Y_glob + moving[0] <= 0 and self.Y_glob + moving[0] >= 600 - 1500:
+        if self.X_glob < self.Size[0] - self.Size_map[0]:
+              self.X_glob = self.Size[0] - self.Size_map[0]
+        if self.Y_glob + moving[0] <= 0 and self.Y_glob + moving[0] >= self.Size[1] - self.Size_map[1]:
             self.Y_glob += moving[1]
         if self.Y_glob > 0:
               self.Y_glob = 0
-        if self.Y_glob < 600 - 1500:
-              self.Y_glob = 600 - 1500
+        if self.Y_glob < self.Size[1] - self.Size_map[1]:
+              self.Y_glob = self.Size[1] - self.Size_map[1]
         tmp_x = tmp_x - self.X_glob
         tmp_y = tmp_y - self.Y_glob
         for lines in self.all_plates:
@@ -126,12 +140,39 @@ class House(Objects_for_build):
             self.type = pygame.image.load(".\MyGame\house.png")
             self.game = game
             self.prise = 100
-            self.key = "house"
+            self.key = "house" 
             self.screen = Sc
             self.dopusc = [0, 2]
+
         def buy_house(self):
             self.buy()
 
+        def buf_people():
+            pass
+
+        def buf_economic():
+            pass
+
+
+class Road(Objects_for_build):
+        global game, Sc
+        def __init__(self, coords):
+            self.coords = coords
+            self.type = pygame.image.load(".\MyGame\house.png")
+            self.game = game
+            self.prise = 100
+            self.key = "house" 
+            self.screen = Sc
+            self.dopusc = [0, 2]
+
+        def buy_road(self):
+            self.buy()
+
+        def buf_people():
+            pass
+
+        def buf_economic():
+            pass
             
 
 game = Game()
