@@ -2,11 +2,11 @@ import pygame
 pygame.init()
 class Game:
         time = 0
-        money = 20
+        money = 2000000
         all_plates = [[0 for i in range(90)] for i in range(90)]
-        all_plates[0][0] = 1
         def buy(self):
                 points = self.get_romb(self.coords)
+                print(points)
                 if not(self.game.all_plates[points[0]][points[1]] in self.dopusc):
                     self.can_not_build()
                     return 0
@@ -23,7 +23,7 @@ class Game:
         def need_more_money(self, money):
             pass
         
-        def can_not_build():
+        def can_not_build(self):
             pass
         
         def buf_debaf(self):
@@ -34,8 +34,8 @@ class Screen(Game):
     Y_glob = 0
     Size = [1060, 600]
     screen = pygame.display.set_mode(Size)
-    grass = pygame.image.load(".\MyGame\map.png")
-    Size_map = [3600, 2400]
+    grass = pygame.image.load(".\MyGame\Group 31.png")
+    Size_map = [3780, 1920]
 
     "Экран ҫӗнетни. Вӑйӑ хирне таврӑнмалла"    
     def update_window(self):
@@ -123,9 +123,15 @@ class Screen(Game):
             y = points[1] * 30 + self.Y_glob
             print(points)
             self.update_window()
+           """ if type(game.all_plates[points[0]][points[1]]) != int:
+                something = game.all_plates[points[0]][points[1]]
+                self.screen.blit(something.type, (something.coords[0], something.coords[1] - 140))"""
             if game.all_plates[points[0]][points[1]] != 1:
                 position = pygame.draw.lines(self.screen, (0,0,0), True,
                     [[x + 60, y], [x + 120, y + 30], [x + 60, y + 60], [x, y + 30]], 2)
+        
+        
+    
     def drawing(self, points, screen):
         print(0)
         screen.screen.blit(self.type, (points[0], points[1] - 140))
@@ -157,7 +163,7 @@ class House(Objects_for_build):
 class Road(Objects_for_build):
         global game, Sc
         def __init__(self, coords):
-            self.coords = coords
+            self.coords = [coords[0] - 60, coords[1] - 30]
             self.type = pygame.image.load(".\MyGame\house.png")
             self.game = game
             self.prise = 100
@@ -218,6 +224,8 @@ while not done:
             Sc.mark_plate([x,y])
             house.buy_house()
             Sc.update_window()
+            prev_x = -2
+            
     pygame.display.flip()
 
 
