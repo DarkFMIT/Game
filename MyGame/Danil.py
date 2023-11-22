@@ -128,7 +128,7 @@ class Screen(Game):
             prev_y = points[1]
             x = points[0] * 60 + self.X_glob
             y = points[1] * 30 + self.Y_glob
-            print(points)
+            #print(points, end=', ')
             self.update_window()
             if type(game.all_plates[points[0]][points[1]]) != int:
                 something = game.all_plates[points[0]][points[1]]
@@ -197,6 +197,8 @@ game = Game()
 Sc = Screen()
 x = 0
 y = 0
+x_for_lines = 0
+y_for_lines = 0
 position = pygame.draw.lines(Sc.screen, (0,0,0), True,
     [[x + 60, y], [x + 120, y + 30], [x + 60, y + 60], [x, y + 30]], 2)
 
@@ -222,14 +224,10 @@ while not done:
                         else:
                             moving = pygame.mouse.get_rel()
                             moving = Sc.move(moving)
-                            x = x - moving[0]
-                            y = y - moving[1]
                             Sc.update_window()
-                            if(prev_x != -2):
-                                position = pygame.draw.lines(Sc.screen, (0,0,0), True,
-                                    [[x + 60, y], [x + 120, y + 30], [x + 60, y + 60], [x, y + 30]], 2)
             if event.button == 1:
                 Sc.mark_plate(event.pos)
+                print(x,y)
         if event.type == pygame.KEYDOWN and event.key == pygame.K_b and prev_x != -2:
             moving = [x + 1, y + 1]
             house = House(moving) # Ошибка в координатах
