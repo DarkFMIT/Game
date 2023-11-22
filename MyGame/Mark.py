@@ -122,7 +122,7 @@ class Screen(Game):
             prev_y = points[1]
             x = points[0] * 60 + self.X_glob
             y = points[1] * 30 + self.Y_glob
-            print(points)
+            print(points, end=', ')
             self.update_window()
             if type(game.all_plates[points[0]][points[1]]) != int:
                 something = game.all_plates[points[0]][points[1]]
@@ -134,7 +134,7 @@ class Screen(Game):
             y = pos[1]
         
         
-    
+        
     def drawing(self, points, screen):
         print(0)
         screen.screen.blit(self.type, (points[0], points[1] - 140))
