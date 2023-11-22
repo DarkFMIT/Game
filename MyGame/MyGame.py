@@ -1,29 +1,35 @@
 import pygame
 pygame.init()
 class Game:
-    time = 0
-    money = 200000
-    all_plates = [[0 for i in range(52)] for i in range(42)]
-    #all_plates[0][0] = 1
-    already_bought = {}
-    objects = {}
-    def buy(self, cost):
-        self.money -= cost
-    def randTick(self):
-        self.time += 1
+        time = 0
+        money = 200000
+        all_plates = [[0 for i in range(60)] for i in range(60)]
+        all_plates[0][0] = 1
+        def buy(self):
+                points = self.get_romb(self.coords)
+                if not(self.game.all_plates[points[0]][points[1]] in self.dopusc):
+                     return 0
+                if self.game.money < self.prise:
+                     return 1
+                self.money -= self.prise
+                self.game.all_plates[points[0]][points[1]] = self       
+        def randTick(self):
+                self.time += 1
 
 class Screen(Game):
     X_glob = 0
     Y_glob = 0
     screen = pygame.display.set_mode((1060, 600))
     grass = pygame.image.load(".\MyGame\grass_grid.jpg")
-    
+
     "Экран ҫӗнетни. Вӑйӑ хирне таврӑнмалла"    
     def update_window(self):
         self.screen.blit(self.grass, (self.X_glob, self.Y_glob))
-        for key in self.already_bought.keys():
-            for points in self.already_bought[key]:
-                self.screen.blit(self.objects[key], (points[0], points[1]))
+        for i in range(52):
+             for j in range(42):
+                  something = self.all_plates[j][i]
+                  if type(something) != int:
+                       self.screen.blit(something.type, (something.coords[0], something.coords[1] - 140))
         pygame.display.flip()
     
     "Экрана тата пур объекта та (ҫуртсене, ҫулсене, курсора)куҫарса лартассишӗн яваплӑ функци"
@@ -44,16 +50,18 @@ class Screen(Game):
               self.Y_glob = 600 - 1500
         tmp_x = tmp_x - self.X_glob
         tmp_y = tmp_y - self.Y_glob
-        for key in self.already_bought.keys():
-            for i in range(len(self.already_bought[key])):
-                self.already_bought[key][i][0] -= tmp_x
-                self.already_bought[key][i][1] -= tmp_y
+        for lines in self.all_plates:
+            for something in lines:
+                if type(something) != int:
+                        something.coords[0] -= tmp_x
+                        something.coords[1] -= tmp_y
         return [tmp_x, tmp_y]
     
     "Вӑйӑ хирӗнчи кликпа ромб вырӑнне шайлаштарма май парать"
     def get_romb(self, points):
-        x = points[0]
-        y = points[1]
+        global Sc
+        x = points[0] - Sc.X_glob 
+        y = points[1] - Sc.Y_glob
         if (x // 60 + y // 30) % 2 == 0:
             x_1 = (x // 60) * 60
             y_1 = (y // 30 + 1) * 30
@@ -83,14 +91,12 @@ class Screen(Game):
                 x_return = x // 60 - 1
                 y_return = y // 30
         return [x_return, y_return]
+
     
     "Функци эпир пуснӑ ромбран уйӑрать, тепӗр хут кӑшкӑрсан, уйӑрӑлӑва пуҫтарать."
     def mark_plate(self, pos):
         global x, y, prev_x, prev_y, game, position
-        points = [0, 0]
-        points[0] = pos[0] - self.X_glob
-        points[1] = pos[1] - self.Y_glob
-        points = self.get_romb(points)
+        points = self.get_romb(pos)
         if points[0] == prev_x and points[1] == prev_y:
             prev_x = -2
             prev_y = -2
@@ -105,6 +111,27 @@ class Screen(Game):
             if game.all_plates[points[0]][points[1]] != 1:
                 position = pygame.draw.lines(self.screen, (0,0,0), True,
                     [[x + 60, y], [x + 120, y + 30], [x + 60, y + 60], [x, y + 30]], 2)
+    def drawing(self, points, screen):
+        print(0)
+        screen.screen.blit(self.type, (points[0], points[1] - 140))
+
+class Objects_for_build(Screen):
+        pass
+
+class House(Objects_for_build):
+        global game, Sc
+        def __init__(self, coords):
+            self.coords = coords
+            self.type = pygame.image.load(".\MyGame\house.png")
+            self.game = game
+            self.prise = 100
+            self.key = "house" 
+            self.screen = Sc
+            self.dopusc = [0, 2]
+        def buy_house(self):
+            self.buy()
+
+            
 
 game = Game()
 Sc = Screen()
@@ -112,6 +139,7 @@ x = 0
 y = 0
 position = pygame.draw.lines(Sc.screen, (0,0,0), True,
     [[x + 60, y], [x + 120, y + 30], [x + 60, y + 60], [x, y + 30]], 2)
+
 
 prev_x = -1
 prev_y = -1 
@@ -142,4 +170,10 @@ while not done:
                                     [[x + 60, y], [x + 120, y + 30], [x + 60, y + 60], [x, y + 30]], 2)
             if event.button == 1:
                 Sc.mark_plate(event.pos)
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_b and prev_x != -2:
+            moving = [x, y]
+            house = House(moving) # Ошибка в координатах
+            Sc.mark_plate([x,y])
+            house.buy_house()
+            Sc.update_window()
     pygame.display.flip()
