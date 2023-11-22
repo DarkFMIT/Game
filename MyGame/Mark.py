@@ -145,7 +145,7 @@ class Objects_for_build(Screen):
 class House(Objects_for_build):
         global game, Sc
         def __init__(self, coords):
-            self.coords = coords  # Используйте координаты ромба вместо смещения
+            self.coords = coords
             x = coords[0] * 60 + Sc.X_glob
             y = coords[1] * 30 + Sc.Y_glob
             self.points = [x, y]
