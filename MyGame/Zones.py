@@ -9,4 +9,4 @@ for coord in water_coords:
     all_plates[x][y] = 1
 
 for row in all_plates:
-    print(row)
+    print(*row)

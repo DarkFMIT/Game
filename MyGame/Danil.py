@@ -3,7 +3,13 @@ pygame.init()
 class Game:
         time = 0
         money = 2000000
+        file = open('./MyGame/txt.txt', 'r+')
         all_plates = [[0 for i in range(90)] for i in range(90)]
+        for i in range(20):
+            str = file.readline().split()
+            for j in range(len(str)):
+                all_plates[i][j] = int(str[j])
+                
         def buy(self):
                 points = self.get_romb(self.coords)
                 print(points)
@@ -15,7 +21,8 @@ class Game:
                     return 1
                 
                 self.money -= self.prise
-                self.game.all_plates[points[0]][points[1]] = self       
+                self = House(points)   
+                self.game.all_plates[points[0]][points[1]] = self     
         
         def randTick(self):
                 self.time += 1
@@ -54,22 +61,22 @@ class Screen(Game):
         if self.X_glob + moving[0] <= 0 and self.X_glob + moving[0] >= self.Size[0] - self.Size_map[0]:
             self.X_glob += moving[0]
         if self.X_glob > 0:
-              self.X_glob = 0
+            self.X_glob = 0
         if self.X_glob < self.Size[0] - self.Size_map[0]:
-              self.X_glob = self.Size[0] - self.Size_map[0]
+            self.X_glob = self.Size[0] - self.Size_map[0]
         if self.Y_glob + moving[0] <= 0 and self.Y_glob + moving[0] >= self.Size[1] - self.Size_map[1]:
             self.Y_glob += moving[1]
         if self.Y_glob > 0:
-              self.Y_glob = 0
+            self.Y_glob = 0
         if self.Y_glob < self.Size[1] - self.Size_map[1]:
-              self.Y_glob = self.Size[1] - self.Size_map[1]
+            self.Y_glob = self.Size[1] - self.Size_map[1]
         tmp_x = tmp_x - self.X_glob
         tmp_y = tmp_y - self.Y_glob
         for lines in self.all_plates:
             for something in lines:
                 if type(something) != int:
-                        something.coords[0] -= tmp_x
-                        something.coords[1] -= tmp_y
+                    something.points[0] -= tmp_x
+                    something.points[1] -= tmp_y
         return [tmp_x, tmp_y]
     
     "Вӑйӑ хирӗнчи кликпа ромб вырӑнне шайлаштарма май парать"
@@ -144,11 +151,10 @@ class Objects_for_build(Screen):
 class House(Objects_for_build):
         global game, Sc
         def __init__(self, coords):
-            points = self.get_romb(coords)
-            x = points[0] * 60 + self.X_glob
-            y = points[1] * 30 + self.Y_glob
-            self.points = [x, y]
             self.coords = coords
+            x = coords[0] * 60 + Sc.X_glob
+            y = coords[1] * 30 + Sc.Y_glob
+            self.points = [x, y]
             self.type = pygame.image.load(".\MyGame\house.png")
             self.game = game
             self.prise = 100
