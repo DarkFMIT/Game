@@ -44,7 +44,7 @@ class Screen(Game):
              for j in range(60):
                   something = self.all_plates[j][i]
                   if type(something) != int:
-                       self.screen.blit(something.type, (something.coords[0], something.coords[1] - 140))
+                       self.screen.blit(something.type, (something.points[0], something.points[1] - 140))
         pygame.display.flip()
     
     "Экрана тата пур объекта та (ҫуртсене, ҫулсене, курсора)куҫарса лартассишӗн яваплӑ функци"
@@ -123,12 +123,14 @@ class Screen(Game):
             y = points[1] * 30 + self.Y_glob
             print(points)
             self.update_window()
-           """ if type(game.all_plates[points[0]][points[1]]) != int:
+            if type(game.all_plates[points[0]][points[1]]) != int:
                 something = game.all_plates[points[0]][points[1]]
-                self.screen.blit(something.type, (something.coords[0], something.coords[1] - 140))"""
+                self.screen.blit(something.type, (something.points[0], something.points[1] - 140))
             if game.all_plates[points[0]][points[1]] != 1:
-                position = pygame.draw.lines(self.screen, (0,0,0), True,
-                    [[x + 60, y], [x + 120, y + 30], [x + 60, y + 60], [x, y + 30]], 2)
+                position = pygame.draw.lines(self.screen, (0,0,0), False,
+                    [[x + 120, y + 30], [x + 60, y + 60], [x, y + 30]], 2)
+            x = pos[0]
+            y = pos[1]
         
         
     
@@ -142,6 +144,10 @@ class Objects_for_build(Screen):
 class House(Objects_for_build):
         global game, Sc
         def __init__(self, coords):
+            points = self.get_romb(coords)
+            x = points[0] * 60 + self.X_glob
+            y = points[1] * 30 + self.Y_glob
+            self.points = [x, y]
             self.coords = coords
             self.type = pygame.image.load(".\MyGame\house.png")
             self.game = game
@@ -219,7 +225,7 @@ while not done:
             if event.button == 1:
                 Sc.mark_plate(event.pos)
         if event.type == pygame.KEYDOWN and event.key == pygame.K_b and prev_x != -2:
-            moving = [x, y]
+            moving = [x + 1, y + 1]
             house = House(moving) # Ошибка в координатах
             Sc.mark_plate([x,y])
             house.buy_house()
@@ -227,9 +233,6 @@ while not done:
             prev_x = -2
             
     pygame.display.flip()
-
-
-
 
 
 
