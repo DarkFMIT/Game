@@ -1,0 +1,22 @@
+error: Incorrect points. The value without numbers.
+error: Incorrect points. Unknown sign.
+error: Incorrect points. Too much dots or dot at the first place.
+error: Incorrect points. Too much dots or dot at the first place.
+error: Incorrect points. Too much minuses or minus in the center.
+error: Incorrect points. Too much dots or dot at the first place.
+error: Incorrect points. Too much minuses or minus in the center.
+error: Incorrect points. Must be 2 values in one line.
+error: Incorrect points. Must be 2 values in one line.
+error: division by zero
+<y> = 118.757
+<y * y> = 16450.3
+<y> * <y> = 14103.2
+<x> = 28
+<x * x> = 916
+<x> * <x> = 784
+<y * x> = 3881.8
+Slope coefficient = 4.21671  Error rate = 0.00196832
+Free member = 0.689061  Error rate = 0.0226143
+error: Incorrect points. Unknown sign.
+error: Can't open file 'No_file'.
+error: No points in a file.
