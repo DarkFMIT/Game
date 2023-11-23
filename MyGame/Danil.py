@@ -145,10 +145,8 @@ class Screen(Game):
     def drawing(self, points, screen):
         print(0)
         screen.screen.blit(self.type, (points[0], points[1] - 140))
-
 class Objects_for_build(Screen):
         pass
-
 class House(Objects_for_build):
         global game, Sc
         def __init__(self, coords):
@@ -171,8 +169,6 @@ class House(Objects_for_build):
 
         def buf_economic():
             pass
-
-
 class Road(Objects_for_build):
         global game, Sc
         def __init__(self, coords):
@@ -192,7 +188,6 @@ class Road(Objects_for_build):
 
         def buf_economic():
             pass
-
 class Menu(Screen):
     global game, Sc, x, y
 

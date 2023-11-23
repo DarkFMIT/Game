@@ -36,7 +36,7 @@ while not done:
                             moving = Sc.move(moving)
                             Sc.update_window()
             if event.button == 1:
-                Sc.mark_plate(event.pos)
+                Sc.mark_plate(event.pos, prev_x, prev_y,)
                 print(x, y)
         if event.type == pygame.KEYDOWN and event.key == pygame.K_b and prev_x != -2:
             moving = [x + 1, y + 1]

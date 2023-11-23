@@ -80,9 +80,9 @@ class Screen(Game):
                 y_return = y // 30
         return [x_return, y_return]
 
-    def mark_plate(self, pos):
-        global x, y, prev_x, prev_y, game, position
-        points = self.get_romb(pos, Sc)
+    def mark_plate(self, pos, prev_x, prev_y,):
+        global x, y, game, position
+        points = self.get_romb(pos, self)
         if points[0] == prev_x and points[1] == prev_y:
             prev_x = -2
             prev_y = -2
