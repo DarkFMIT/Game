@@ -1,3 +1,4 @@
+from Danil import *
 class Game:
         time = 0
         money = 2000000
@@ -21,6 +22,7 @@ class Game:
                 self.money -= self.prise
                 self = House(points)   
                 self.game.all_plates[points[0]][points[1]] = self     
+                
         
         def randTick(self):
                 self.time += 1
