@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C++(CONSOLE)",
+      "type": "cppvsdbg",
+      "preLaunchTask": "C/C++: g++.exe build active file",
+      "request": "launch",
+      "program": "${fileBasenameNoExtension}.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "console": "externalTerminal"
+    },
+    {
+      "name": "Python(CONSOLE)",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "externalTerminal",
+      "justMyCode": true
+    }
+  ]
+}
