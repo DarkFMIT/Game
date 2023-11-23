@@ -191,7 +191,23 @@ class Road(Objects_for_build):
 
         def buf_economic():
             pass
-            
+
+class Menu(Screen):
+    global game, Sc, x, y
+
+    def __init__(self, position):
+        self.image = pygame.image.load(".\MyGame\Menu.png")
+        self.pos = position
+        self.game = game
+        self.screen = Sc
+    def show(self):
+        moving = self.screen.move([self.Size[0] // 2 - self.pos[0], self.Size[1] // 2 - self.pos[1]])
+        pygame.display.flip()
+        self.screen.update_window()
+        self.screen.mark_plate([x + moving[0],y + moving[1]])
+        pygame.display.flip()
+
+
 
 game = Game()
 Sc = Screen()
@@ -235,6 +251,9 @@ while not done:
             house.buy_house()
             Sc.update_window()
             prev_x = -2
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_l and prev_x != -2:
+            men = Menu([x,y])
+            men.show()
             
     pygame.display.flip()
 
