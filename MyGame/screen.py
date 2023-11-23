@@ -46,9 +46,8 @@ class Screen(Game):
                     something.points[1] -= tmp_y
         return [tmp_x, tmp_y]
 
-    def get_romb(self, points):
+    def get_romb(self, points, Sc):
         x_return = y_return = 0  # Добавлены эти строки
-        global Sc  # Добавлено это
         x = points[0] - Sc.X_glob 
         y = points[1] - Sc.Y_glob
         if (x // 60 + y // 30) % 2 == 0:
@@ -83,7 +82,7 @@ class Screen(Game):
 
     def mark_plate(self, pos):
         global x, y, prev_x, prev_y, game, position
-        points = self.get_romb(pos)
+        points = self.get_romb(pos, Sc)
         if points[0] == prev_x and points[1] == prev_y:
             prev_x = -2
             prev_y = -2
