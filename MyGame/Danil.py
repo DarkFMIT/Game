@@ -5,7 +5,7 @@ class Game:
         money = 2000000
         file = open('./MyGame/txt.txt', 'r+')
         all_plates = [[0 for i in range(90)] for i in range(90)]
-        for i in range(20):
+        for i in range(80):
             str = file.readline().split()
             for j in range(len(str)):
                 all_plates[i][j] = int(str[j])
