@@ -1,8 +1,8 @@
 from objects_for_build import Objects_for_build
-from screen import Sc, game
 
 class House(Objects_for_build):
-    def __init__(self, coords):
+    def __init__(self, coords, screen):
+        super().__init__(screen.game)
         self.coords = coords
         x = coords[0] * 60 + Sc.X_glob
         y = coords[1] * 30 + Sc.Y_glob

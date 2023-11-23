@@ -9,6 +9,10 @@ class Screen(Game):
     grass = pygame.image.load(".\MyGame\Group 31.png")
     Size_map = [3780, 1920]
 
+    def __init__(self, game):
+        super().__init__()
+        self.game = game
+
     def update_window(self):
         self.screen.blit(self.grass, (self.X_glob, self.Y_glob))
         for i in range(80):
