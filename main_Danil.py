@@ -43,11 +43,6 @@ while not done:
                             moving = pygame.mouse.get_rel()
                             moving = screen.move(moving)
                             screen.update_window()
-                            if screen.prev_x != -2:
-                                x = position[0] - moving[0]
-                                y = position[1] - moving[1]
-                                screen.mark_plate([x, y])
-                                position = screen.mark_plate([x, y])
             if event.button == 1:
                 position = screen.mark_plate(event.pos)
         if event.type == pygame.KEYDOWN and event.key == pygame.K_b and screen.prev_x != -2:
