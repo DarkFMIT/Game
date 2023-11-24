@@ -29,7 +29,7 @@ while not done:
             if event.button == 1:
                 position = screen.mark_plate(event.pos)
         if event.type == pygame.KEYDOWN and event.key == pygame.K_b and screen.prev_x != -2:
-            house = House(screen, position) # Ошибка в координатах
+            house = House(screen, position)
             house.buy()
             screen.update_window()
             prev_x = -2

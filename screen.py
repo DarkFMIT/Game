@@ -1,6 +1,22 @@
 from game import Game
 import pygame
+"""
+    В экране хранятся:
+        Игра           - .game
+        Х поля         - .X_glob
+        Y поля         - .Y_glob
+        Размер окна    - .size
+        Окно           - .window
+        Размер карты   - .size_map
+        Карта          - .map
+        Предыдущая X   - .prev_x
+        Предыдущая Y   - .prev_y
+"""
 class Screen(Game):
+
+    # Создание экрана с начальными параметрами
+    # Требует параметр Game
+    # Нет возврата
     def __init__(self, game):
         self.game = game
         self.X_glob = 0
@@ -11,6 +27,10 @@ class Screen(Game):
         self.size_map = [3780, 1920]
         self.prev_x = -2
         self.prev_y = -2
+
+    # Обновление экрана. Отрисовка всех фиксированных объектов
+    # Параметров не требует
+    # Нет возврата
     def update_window(self):
         self.window.blit(self.map, (self.X_glob, self.Y_glob))
         for i in range(80):
@@ -19,6 +39,10 @@ class Screen(Game):
                 if type(tmp) != int:
                     self.window.blit(tmp.icon, tmp.points_for_build)
         pygame.display.flip()
+
+    # Пермещение поля на некоторые координаты
+    # Требует массив из сдвига по х и сдвига по y
+    # возвращает относительный сдвиг
     def move(self, moving):
         tmp_x = self.X_glob
         tmp_y = self.Y_glob
@@ -42,6 +66,10 @@ class Screen(Game):
                     something.points_for_build[0] -= tmp_x
                     something.points_for_build[1] -= tmp_y
         return [tmp_x, tmp_y]
+    
+    # Находит ромб по координатам касания
+    # Требует координаты
+    # Возвращает позицию ромба в матрице
     def get_romb(self, points):
         x = points[0] - self.X_glob
         y = points[1] - self.Y_glob
@@ -74,6 +102,8 @@ class Screen(Game):
                 x_return = x // 60 - 1
                 y_return = y // 30
         return [x_return, y_return]
+    
+    
     def mark_plate(self, pos):
         points = self.get_romb(pos)
         if points[0] == self.prev_x and points[1] == self.prev_y:
