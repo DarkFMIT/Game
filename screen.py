@@ -1,9 +1,9 @@
 from game import Game
 import pygame
 """
-    В экране хранятся:
+    B экране хранятся:
         Игра           - .game
-        Х поля         - .X_glob
+        X поля         - .X_glob
         Y поля         - .Y_glob
         Размер окна    - .size
         Окно           - .window
@@ -103,7 +103,9 @@ class Screen(Game):
                 y_return = y // 30
         return [x_return, y_return]
     
-    
+    # Выделяет ромб на который нажали. Повторное нажатие убирает выделение
+    # Требует координаты
+    # Возвращает координаты центра выделенного ромба
     def mark_plate(self, pos):
         points = self.get_romb(pos)
         if points[0] == self.prev_x and points[1] == self.prev_y:
@@ -123,6 +125,10 @@ class Screen(Game):
                 pygame.draw.lines(self.window, (0,0,0), False,
                     [[x - 60, y], [x, y + 30], [x + 60, y]], 2)
             return[x, y]
+        
+    # Функция покупки здания. Меняет цены, сохраняет данные о здании в матрице
+    # Требует объект типа "Строение"
+    # Возврата нет
     def buy_building(self, building):
         points = self.get_romb([building.points_for_build[0] + 60, 
                                 building.points_for_build[1] + 170])

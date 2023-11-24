@@ -1,5 +1,14 @@
 from screen import Screen
+
+"""
+    Объекты этого класса не используется
+    Необходим для упрощения кода дочерних классов
+"""
 class Objects_for_build(Screen):
+
+    # Инициализация дочернего класса
+    # Требует окно, позицию, иконку
+    # Возврата нет
     def __init__(self, screen, pos, icon):
         self.game = screen.game
         self.screen = screen
