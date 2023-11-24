@@ -2,6 +2,7 @@ from game import Game
 from screen import Screen
 from objects_for_build import Objects_for_build
 from house import House
+from road import Road
 import pygame
 
 class Menu(Screen):
@@ -46,8 +47,8 @@ while not done:
             if event.button == 1:
                 position = screen.mark_plate(event.pos)
         if event.type == pygame.KEYDOWN and event.key == pygame.K_b and screen.prev_x != -2:
-            house = House(screen, position)
-            house.buy()
+            road = Road(screen, position)
+            road.buy()
             screen.update_window()
             prev_x = -2
         if event.type == pygame.KEYDOWN and event.key == pygame.K_m and screen.prev_x != -2:
