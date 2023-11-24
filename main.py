@@ -12,6 +12,8 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             done = True
+        if event.type == pygame.QUIT:
+            done = True
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 3:
                 pygame.mouse.get_rel()
