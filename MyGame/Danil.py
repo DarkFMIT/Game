@@ -4,7 +4,7 @@ pygame.init()
 class Game:
         time = 0
         money = 2000000
-        file = open('./MyGame/txt.txt', 'r+')
+        file = open('./txt.txt', 'r+')
         all_plates = [[0 for i in range(90)] for i in range(90)]
         for i in range(80):
             str = file.readline().split()
@@ -22,7 +22,7 @@ class Game:
                     return 1
                 
                 self.money -= self.prise
-                   
+                self = House(points)
                 self.game.all_plates[points[0]][points[1]] = self     
                 
         
@@ -42,7 +42,7 @@ class Screen(Game):
     Y_glob = 0
     Size = [1060, 600]
     screen = pygame.display.set_mode(Size)
-    grass = pygame.image.load(".\MyGame\Group 31.png")
+    grass = pygame.image.load(".\Group 31.png")
     Size_map = [3780, 1920]
 
     "Экран ҫӗнетни. Вӑйӑ хирне таврӑнмалла"    
@@ -154,7 +154,7 @@ class House(Objects_for_build):
             x = coords[0] * 60 + Sc.X_glob
             y = coords[1] * 30 + Sc.Y_glob
             self.points = [x, y]
-            self.type = pygame.image.load(".\MyGame\house.png")
+            self.type = pygame.image.load(".\house.png")
             self.game = game
             self.prise = 100
             self.key = "house" 
@@ -173,7 +173,7 @@ class Road(Objects_for_build):
         global game, Sc
         def __init__(self, coords):
             self.coords = [coords[0] - 60, coords[1] - 30]
-            self.type = pygame.image.load(".\MyGame\house.png")
+            self.type = pygame.image.load(".\house.png")
             self.game = game
             self.prise = 100
             self.key = "house" 
@@ -192,7 +192,7 @@ class Menu(Screen):
     global game, Sc, x, y
 
     def __init__(self, position):
-        self.image = pygame.image.load(".\MyGame\Menu.png")
+        self.image = pygame.image.load(".\Menu.png")
         self.pos = position
         self.game = game
         self.screen = Sc
