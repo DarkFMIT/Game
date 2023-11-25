@@ -8,7 +8,8 @@ import pygame
         Допустимые клетки     - .dopusc
         Цена                  - .prise
         Игра                  - .game
-        Экран                 - .screen      
+        Экран                 - .screen    
+        Можно ли строить      - .can   
 """
 class House(Objects_for_build):
 
