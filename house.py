@@ -3,7 +3,7 @@ import pygame
 
 """
     B классе хранятся:
-        Иконка                - .icon
+        Иконка                - .icon  [120 * 200]
         Координаты отрисовки  - .points_for_build
         Допустимые клетки     - .dopusc
         Цена                  - .prise
