@@ -11,7 +11,7 @@ class Game:
     # Нет возврата
     def __init__(self):
         self.time = 0
-        self.money = 20000
+        self.money = 100000
         file = open('./txt.txt', 'r+')
         self.all_plates = [[0 for i in range(90)] for i in range(90)]
         for i in range(80):

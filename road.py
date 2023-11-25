@@ -7,9 +7,11 @@ class Road(Objects_for_build):
         icon = None
         points = screen.get_romb(pos)
         self.dopusc = [0, 2]
-        self.prise = 1
+        self.prise = 10000
         super().__init__(screen, pos, icon)
-        self.icon = self.choose_icon(points)
+        self.can = self.screen.can_build(self)
+        if(self.can == "True"):
+            self.icon = self.choose_icon(points)
     def choose_icon(self, points):
         icon_type = ""
         plate = self.game.all_plates[points[0] - 1][points[1] - 1]
@@ -36,7 +38,7 @@ class Road(Objects_for_build):
             plate.rechoose_icon(points)
         else:
             icon_type += '0'
-        icon = pygame.image.load(f".\\roads\{icon_type}.png")
+        icon = pygame.image.load(f".\\resources\\roads\{icon_type}.png")
         return icon
     def rechoose_icon(self, points_of_new):
         icon_type = ""
@@ -61,7 +63,10 @@ class Road(Objects_for_build):
             icon_type += '1'
         else:
             icon_type += '0'
-        icon = pygame.image.load(f".\\roads\{icon_type}.png")
+        icon = pygame.image.load(f".\\resources\\roads\{icon_type}.png")
         self.icon = icon
     def buy(self):
-        self.screen.buy_building(self)
+        if(self.can == "True"):
+            self.screen.buy_building(self)
+        else:
+            self.screen.show_error(self.can)

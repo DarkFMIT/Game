@@ -7,7 +7,7 @@ import pygame
 
 class Menu(Screen):
     def __init__(self, screen):
-        self.menu = pygame.image.load(".\Menu.png")
+        self.menu = pygame.image.load(".\\resources\Menu.png")
         self.screen = screen
     def centre(self, pos):
         x = self.screen.size[0] // 2 - pos[0]
@@ -35,6 +35,7 @@ while not done:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 3:
                 pygame.mouse.get_rel()
+                screen.prev_x = -2
                 while pygame.mouse.get_pressed():
                     events = pygame.event.get()
                     if(len(events) != 0):
@@ -50,7 +51,12 @@ while not done:
             road = Road(screen, position)
             road.buy()
             screen.update_window()
-            prev_x = -2
+            screen.prev_x = -2
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_h and screen.prev_x != -2:
+            house = House(screen, position)
+            house.buy()
+            screen.update_window()
+            screen.prev_x = -2
         if event.type == pygame.KEYDOWN and event.key == pygame.K_m and screen.prev_x != -2:
             menu = Menu(screen)
             position = menu.centre(position)
