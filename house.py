@@ -8,7 +8,8 @@ import pygame
         Допустимые клетки     - .dopusc
         Цена                  - .prise
         Игра                  - .game
-        Экран                 - .screen      
+        Экран                 - .screen    
+        Можно ли строить      - .can   
 """
 class House(Objects_for_build):
 
@@ -16,14 +17,18 @@ class House(Objects_for_build):
     # Требует окно и координаты
     # Возврата нет
     def __init__(self, screen, pos):
-        icon = pygame.image.load(".\house.png")
+        icon = pygame.image.load(".\\resources\\buildings\house.png")
         self.dopusc = [0, 2]
-        self.prise = 1
+        self.prise = 10000
         super().__init__(screen, pos, icon)
+        self.can = self.screen.can_build(self)
 
     # Покупка здания
     # Параметры не требует
     # Возврата нет
     def buy(self):
-        self.screen.buy_building(self)
+        if(self.can == "True"):
+            self.screen.buy_building(self)
+        else:
+            self.screen.show_error(self.can)
         

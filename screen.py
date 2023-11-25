@@ -23,7 +23,7 @@ class Screen(Game):
         self.Y_glob = 0
         self.size = [1060, 600]
         self.window = pygame.display.set_mode(self.size)
-        self.map = pygame.image.load(".\Group 31.png")
+        self.map = pygame.image.load(".\\resources\Map.png")
         self.size_map = [3780, 1920]
         self.prev_x = -2
         self.prev_y = -2
@@ -125,18 +125,44 @@ class Screen(Game):
                 pygame.draw.lines(self.window, (0,0,0), False,
                     [[x - 60, y], [x, y + 30], [x + 60, y]], 2)
             return[x, y]
-        
+    
+    # Проверяет возможно ли построить здание
+    # Требует постройку
+    # Возвращает ошибку либо "True"
+    def can_build(self, building):
+        points = self.get_romb([building.points_for_build[0] + 60, 
+                                building.points_for_build[1] + 170])
+        if type(self.game.all_plates[points[0]][points[1]]) != int:
+            return "Error_occupied"
+        if not(self.game.all_plates[points[0]][points[1]] in building.dopusc):
+            return "Error_dopusc"
+        if self.game.money < building.prise:
+            return "Error_money"
+        return "True"
+    
     # Функция покупки здания. Меняет цены, сохраняет данные о здании в матрице
     # Требует объект типа "Строение"
     # Возврата нет
     def buy_building(self, building):
         points = self.get_romb([building.points_for_build[0] + 60, 
                                 building.points_for_build[1] + 170])
-        if not(self.game.all_plates[points[0]][points[1]] in building.dopusc):
-            return 0
-        if self.game.money < building.prise:
-            return 1        
         self.game.money -= building.prise
         self.game.all_plates[points[0]][points[1]] = building    
+    
+
+    # Выводит в центра экрана ошибку, которая закрывается по нажатию
+    # Требует название ошибки
+    # Возврата нет
+    def show_error(self, error_name):
+        error = pygame.image.load(f".\\resources\Errors\{error_name}.png")
+        self.window.blit(error, ((self.size[0] - 480) // 2, 
+                                 (self.size[1] - 250) // 2))
+        pygame.display.flip()
+        done = False
+        while not done:
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    done = True
+        self.update_window()
                 
         
