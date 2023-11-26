@@ -19,7 +19,7 @@ class Road(Objects_for_build):
         icon = None
         points = screen.get_romb(pos)
         self.dopusc = [0, 2]
-        self.prise = 10000
+        self.prise = 10
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)
         if(self.can == "True"):
