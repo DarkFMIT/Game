@@ -138,6 +138,12 @@ class Screen(Game):
             return "Error_dopusc"
         if self.game.money < building.prise:
             return "Error_money"
+        if (not(type(self.game.all_plates[points[0] - 1][points[1] - 1]).__name__ == "Road"
+            or type(self.game.all_plates[points[0] + 1][points[1] - 1]).__name__ == "Road"
+            or type(self.game.all_plates[points[0] + 1][points[1] + 1]).__name__ == "Road"
+            or type(self.game.all_plates[points[0] - 1][points[1] + 1]).__name__ == "Road")
+            and not(type(building).__name__ == "Road")):
+            return "Error_no_road"
         return "True"
     
     # Функция покупки здания. Меняет цены, сохраняет данные о здании в матрице
