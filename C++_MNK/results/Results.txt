@@ -1,2 +1,0 @@
-Slope coefficient = 4.21671  Error rate = 0.00196832
-Free member = 0.689061  Error rate = 0.0226143
