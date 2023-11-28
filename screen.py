@@ -39,7 +39,6 @@ class Screen(Game):
                 if type(tmp) != int:
                     self.window.blit(tmp.icon, tmp.points_for_build)
 
-
     # Пермещение поля на некоторые координаты
     # Требует массив из сдвига по х и сдвига по y
     # возвращает относительный сдвиг
@@ -124,8 +123,10 @@ class Screen(Game):
             if self.game.all_plates[points[0]][points[1]] != 1:
                 pygame.draw.lines(self.window, (0,0,0), False,
                     [[x - 60, y], [x, y + 30], [x + 60, y]], 2)
+            
+            self.window.blit(pygame.image.load(".\\resources\Menu.png"),(0, 570))
             return[x, y]
-    
+        
     # Проверяет возможно ли построить здание
     # Требует постройку
     # Возвращает ошибку либо "True"
