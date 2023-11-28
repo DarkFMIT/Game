@@ -18,12 +18,12 @@ while done:
                     incor += 1
                     done1 = True
                     correct_results.close()
-                    my_results.close
+                    my_results.close()
             finally:
                 done1 = False
                 cor += 1
                 correct_results.close()
-                my_results.close
+                my_results.close()
 
     finally:
         done = False

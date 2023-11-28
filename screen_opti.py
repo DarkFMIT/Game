@@ -34,11 +34,10 @@ class Screen(Game):
     def update_window(self):
         self.window.blit(self.map, (self.X_glob, self.Y_glob))
         for i in range(80):
-            for j in range(60):
+            for j in range(i % 2, 60, 2):
                 tmp = self.game.all_plates[j][i]
                 if type(tmp) != int:
                     self.window.blit(tmp.icon, tmp.points_for_build)
-
 
     # Пермещение поля на некоторые координаты
     # Требует массив из сдвига по х и сдвига по y
@@ -60,8 +59,9 @@ class Screen(Game):
             self.Y_glob = self.size[1] - self.size_map[1]
         tmp_x = tmp_x - self.X_glob
         tmp_y = tmp_y - self.Y_glob
-        for lines in self.game.all_plates:
-            for something in lines:
+        for i in range(70):
+            for j in range(i % 2, 70, 2):
+                something = self.game.all_plates[i][j]
                 if type(something) != int:
                     something.points_for_build[0] -= tmp_x
                     something.points_for_build[1] -= tmp_y
