@@ -1,4 +1,4 @@
-from screen import Screen
+from screen_opti import Screen
 import pygame
 """
     B муню хранится:

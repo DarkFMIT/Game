@@ -1,4 +1,4 @@
-from screen import Screen
+from screen_opti import Screen
 
 """
     Объекты этого класса не используется
