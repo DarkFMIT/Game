@@ -31,6 +31,9 @@ class Game:
         tmp = tm()
         self.time += 100 * (tmp - self.prev)
         self.prev = tmp
+        if (self.time % 10 == 0):
+            self.add_citizens()
+            self.add_score()
 
     def pause_time(self):
         self.prev = tm()
@@ -38,20 +41,17 @@ class Game:
     def add_citizens(self):
         self.citizens += self.core % 100 // 10 * (self.available_space - self.citizens)
 
-    def add_available_space(self):
-        self.available_space += self.pop
-
     def add_score(self):
         # Подсчет очков от зданий
         building_scores = 0
+        house_capacity = 0
         for i in range(70):
             for j in range(i % 2, 70, 2):
                 building = self.all_plates[i][j]
                 if type(building) != int:
                     building_scores += building.get_score()
-        
-        # Учет количества мест в домах
-        house_capacity = sum(building.get_capacity() for building in self.all_plates if isinstance(building, Objects_for_build))
+                    house_capacity += building.get_capacity()
         
         # Обновление общего счета
-        self.score = building_scores + house_capacity
+        self.score = building_scores
+        self.available_space = house_capacity

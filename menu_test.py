@@ -33,8 +33,18 @@ class Menu(Screen):
         self.text_money = pygame.font.SysFont('Comic Sans MS', 15).render("$ " + str(self.screen.game.money), False, (0, 0, 0))
         self.screen.window.blit(self.main_picture, self.pos)
         self.screen.window.blit(self.text_money, (10, self.pos[1] + 5))
+        
+        self.text_citizens = pygame.font.SysFont('Comic Sans MS', 15).render(" number " + str(self.screen.game.citizens), False, (0, 0, 0))
+        self.screen.window.blit(self.text_citizens, (100, self.pos[1] + 5))
+
+        self.text_available_space = pygame.font.SysFont('Comic Sans MS', 15).render(" number " + str(self.screen.game.available_space), False, (0, 0, 0))
+        self.screen.window.blit(self.text_available_space, (200, self.pos[1] + 5))
+
+        self.text_score = pygame.font.SysFont('Comic Sans MS', 15).render(" number " + str(self.screen.game.score), False, (0, 0, 0))
+        self.screen.window.blit(self.text_score, (300, self.pos[1] + 5))
+
         self.update_time()
-    
+
     # Обновление времени
     # Параметры не требует
     # Нет возврата
