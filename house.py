@@ -39,5 +39,5 @@ class House(Objects_for_build):
         return self.pop
 
     def get_capacity(self):
-        # Возвращает количество мест в этом здании
+        # Возвращает количество мест в этом здании хуй
         return self.pop
