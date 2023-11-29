@@ -15,7 +15,7 @@ class Game:
         self.time = 0
         self.money = 100000
         self.citizens = 0
-        self.available_space = 0
+        self.available_capacity = 0
         self.score = 0
         file = open('./resources/for_map.txt', 'r+')
         self.all_plates = [[0 for i in range(90)] for i in range(90)]
@@ -31,7 +31,7 @@ class Game:
         tmp = tm()
         self.time += 100 * (tmp - self.prev)
         self.prev = tmp
-        if (self.time % 10 == 0):
+        if (int(self.time) % 10 == 0):
             self.add_citizens()
             self.add_score()
 
@@ -39,7 +39,10 @@ class Game:
         self.prev = tm()
 
     def add_citizens(self):
-        self.citizens += self.core % 100 // 10 * (self.available_space - self.citizens)
+        difference = self.score % 100 // 10 * (self.available_capacity - self.citizens) // 50
+        if (difference >= (int(self.available_capacity) - int(self.citizens))): 
+            difference = 0
+        self.citizens += difference
 
     def add_score(self):
         # Подсчет очков от зданий
@@ -54,4 +57,4 @@ class Game:
         
         # Обновление общего счета
         self.score = building_scores
-        self.available_space = house_capacity
+        self.available_capacity = house_capacity

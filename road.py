@@ -20,6 +20,7 @@ class Road(Objects_for_build):
         points = screen.get_romb(pos)
         self.dopusc = [0, 2]
         self.prise = 10
+        self.score = 1
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)
         if(self.can == "True"):
@@ -95,3 +96,11 @@ class Road(Objects_for_build):
             self.screen.buy_building(self)
         else:
             self.screen.show_error(self.can)
+
+    def get_score(self):
+        # Возвращает количество очков, которое приносит это здание
+        return self.score
+
+    def get_capacity(self):
+        # Возвращает количество мест в этом здании хуй
+        return 0
