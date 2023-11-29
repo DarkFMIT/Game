@@ -4,7 +4,7 @@ from objects_for_build import Objects_for_build
 from house import House
 from road import Road
 from menu_test import  Menu
-"from hospital import Hospital"
+# from hospital import Hospital
 import pygame
 pygame.font.init()
 
@@ -67,10 +67,10 @@ while not done:
             menu.update_menu()
             screen.prev_x = -2
                     # ПРОВЕРКА ГОСПИТАЛЯ
-       """ if event.type == pygame.KEYDOWN and event.key == pygame.K_c and screen.prev_x != -2:
-            hospital = Hospital(screen, position, "Hospital")
-            hospital.buy()
-            screen.update_window()
-            menu.update_menu()
-            screen.prev_x = -2"""
+        # if event.type == pygame.KEYDOWN and event.key == pygame.K_c and screen.prev_x != -2:
+            # hospital = Hospital(screen, position, "Hospital")
+            # hospital.buy()
+            # screen.update_window()
+            # menu.update_menu()
+            # screen.prev_x = -2
     pygame.display.flip()
