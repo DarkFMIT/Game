@@ -59,7 +59,7 @@ class Menu(Screen):
         return tmp
     
     # Вызывает меню построек
-    # Параметры не требует
+    # Требует координаты выделенного ромба
     # Нет возврата
     def dop_menu(self, mark_pos):
         self.mark_pos = self.centre(mark_pos)
@@ -81,14 +81,17 @@ class Menu(Screen):
         self.update_menu()
         self.screen.update_window()
 
-    
+    # Определение касаний в меню с иконками
+    # Требует координаты касания
+    # Нет возврата
     def work_with_menu(self, pos): 
         if pos[0] < 60 and self.images[self.prev][self.page - 1] != 0:
             self.page -= 1
         elif pos[0] > 1000 and self.images[self.prev][self.page + 1] != 0:
             self.page += 1
-    # По позиции клика определяет кнопку
-    # Требует позицию
+
+    # По позиции клика определяет кнопку на нижней понеле
+    # Требует позицию и координаты выделенного ромба
     # Нет возврата
     def choose(self, pos, mark_pos):
         if pos[0] > 490 and pos[1] > 570:
@@ -118,6 +121,10 @@ class Menu(Screen):
         self.images[2][1] = pygame.image.load(".\\resources\menus\\2_1.png")
         self.images[2][2] = pygame.image.load(".\\resources\menus\\2_2.png")
         self.images[2][3] = pygame.image.load(".\\resources\menus\\2_3.png")  
+    
+    # Центрует экран по координатам выделенного ромба
+    # Требует координаты выделенного ромба
+    # Возвращает пересчитанные координаты выделенного ромба
     def centre(self, pos):
         x = self.screen.size[0] // 2 - pos[0]
         y = self.screen.size[1] // 2 - pos[1]
