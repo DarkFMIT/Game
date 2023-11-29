@@ -1,32 +1,23 @@
 from game import Game
-from screen import Screen
+from screen_opti import Screen
 from objects_for_build import Objects_for_build
 from house import House
 from road import Road
+from menu_test import  Menu
 import pygame
+pygame.font.init()
 
-class Menu(Screen):
-    def __init__(self, screen):
-        self.menu = pygame.image.load(".\\resources\Menu.png")
-        self.screen = screen
-    def centre(self, pos):
-        x = self.screen.size[0] // 2 - pos[0]
-        y = self.screen.size[1] // 2 - pos[1]
-        moving = self.screen.move([x, y])
-        self.screen.update_window()
-        x = pos[0] - moving[0]
-        y = pos[1] - moving[1]
-        new_pos = self.screen.mark_plate([x, y])
-        new_pos = self.screen.mark_plate([x, y])
-        pygame.display.flip()
-        return new_pos
+
 
 
 game = Game()
 screen = Screen(game)
+menu = Menu(screen)
 done = False
 screen.update_window()
 while not done:
+    game.add_time()
+    menu.update_menu()
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             done = True
@@ -45,20 +36,25 @@ while not done:
                             moving = pygame.mouse.get_rel()
                             moving = screen.move(moving)
                             screen.update_window()
+                    game.add_time()
+                    menu.update_menu()
             if event.button == 1:
-                position = screen.mark_plate(event.pos)
+                if event.pos[1] > screen.size[1] - 30:
+                    menu.choose(event.pos)
+                    print(menu.prev)
+                else:
+                    position = screen.mark_plate(event.pos)
+                    menu.update_menu()
         if event.type == pygame.KEYDOWN and event.key == pygame.K_b and screen.prev_x != -2:
             road = Road(screen, position)
             road.buy()
             screen.update_window()
+            menu.update_menu()
             screen.prev_x = -2
         if event.type == pygame.KEYDOWN and event.key == pygame.K_h and screen.prev_x != -2:
             house = House(screen, position)
             house.buy()
             screen.update_window()
+            menu.update_menu()
             screen.prev_x = -2
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_m and screen.prev_x != -2:
-            menu = Menu(screen)
-            position = menu.centre(position)
-            
     pygame.display.flip()
