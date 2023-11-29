@@ -20,6 +20,8 @@ class House(Objects_for_build):
         icon = pygame.image.load(".\\resources\\Buildings\House_1.png")
         self.dopusc = [0, 2]
         self.prise = 10000
+        self.buff = 1
+        self.pop = 20
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)
 
@@ -32,3 +34,10 @@ class House(Objects_for_build):
         else:
             self.screen.show_error(self.can)
         
+    def get_score(self):
+        # Возвращает количество очков, которое приносит это здание
+        return self.pop
+
+    def get_capacity(self):
+        # Возвращает количество мест в этом здании
+        return self.pop
