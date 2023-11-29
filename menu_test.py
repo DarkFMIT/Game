@@ -73,7 +73,6 @@ class Menu(Screen):
     # Требует координаты выделенного ромба
     # Нет возврата
     def dop_menu(self, mark_pos):
-        self.mark_pos = self.centre(mark_pos)
         while self.prev != -2:
             self.screen.update_window()
             self.screen.window.blit(self.images[self.prev][self.page], (0, self.pos[1] - 150))
@@ -151,18 +150,3 @@ class Menu(Screen):
         self.images[2][1] = pygame.image.load(".\\resources\menus\\2_1.png")
         self.images[2][2] = pygame.image.load(".\\resources\menus\\2_2.png")
         self.images[2][3] = pygame.image.load(".\\resources\menus\\2_3.png")  
-    
-    # Центрует экран по координатам выделенного ромба
-    # Требует координаты выделенного ромба
-    # Возвращает пересчитанные координаты выделенного ромба
-    def centre(self, pos):
-        x = self.screen.size[0] // 2 - pos[0]
-        y = self.screen.size[1] // 2 - pos[1]
-        moving = self.screen.move([x, y])
-        self.screen.update_window()
-        x = pos[0] - moving[0]
-        y = pos[1] - moving[1]
-        new_pos = self.screen.mark_plate([x, y])
-        new_pos = self.screen.mark_plate([x, y])
-        self.screen.tmp_pos = new_pos
-        return new_pos
