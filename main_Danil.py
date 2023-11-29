@@ -42,12 +42,14 @@ while not done:
                 if event.pos[1] > screen.size[1] - 30:
                     if (screen.prev_x != -2):
                         menu.choose(event.pos, position)
+                        position = screen.tmp_pos
                         if menu.flag:
                             house = House(screen, position, f"House_{menu.number}")
                             house.buy()
                             screen.update_window()
                             menu.update_menu()
                             screen.prev_x = -2
+                            menu.flag = False
 
                 else:
                     position = screen.mark_plate(event.pos)
