@@ -43,7 +43,12 @@ class Game:
 
     def add_score(self):
         # Подсчет очков от зданий
-        building_scores = sum(building.get_score() for building in self.all_plates)
+        building_scores = 0
+        for i in range(70):
+            for j in range(i % 2, 70, 2):
+                building = self.all_plates[i][j]
+                if type(building) != int:
+                    building_scores += building.get_score()
         
         # Учет количества мест в домах
         house_capacity = sum(building.get_capacity() for building in self.all_plates if isinstance(building, Objects_for_build))

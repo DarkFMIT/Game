@@ -154,4 +154,5 @@ class Menu(Screen):
         y = pos[1] - moving[1]
         new_pos = self.screen.mark_plate([x, y])
         new_pos = self.screen.mark_plate([x, y])
+        self.screen.tmp_pos = new_pos
         return new_pos
