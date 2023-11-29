@@ -16,8 +16,8 @@ class House(Objects_for_build):
     # Создание дома для конкретной клетки
     # Требует окно и координаты
     # Возврата нет
-    def __init__(self, screen, pos):
-        icon = pygame.image.load(".\\resources\\Buildings\House_1.png")
+    def __init__(self, screen, pos, icon_name):
+        icon = pygame.image.load(f".\\resources\\Buildings\{icon_name}.png")
         self.dopusc = [0, 2]
         self.prise = 10000
         super().__init__(screen, pos, icon)

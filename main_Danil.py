@@ -42,7 +42,13 @@ while not done:
                 if event.pos[1] > screen.size[1] - 30:
                     if (screen.prev_x != -2):
                         menu.choose(event.pos, position)
-                        print(menu.prev)
+                        if menu.flag:
+                            house = House(screen, position, f"House_{menu.number}")
+                            house.buy()
+                            screen.update_window()
+                            menu.update_menu()
+                            screen.prev_x = -2
+
                 else:
                     position = screen.mark_plate(event.pos)
                     menu.update_menu()
@@ -53,7 +59,7 @@ while not done:
             menu.update_menu()
             screen.prev_x = -2
         if event.type == pygame.KEYDOWN and event.key == pygame.K_h and screen.prev_x != -2:
-            house = House(screen, position)
+            house = House(screen, position, "House_1")
             house.buy()
             screen.update_window()
             menu.update_menu()
