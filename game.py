@@ -1,5 +1,6 @@
 from time import time as tm
 from random import randint
+"from hospital import Hospital"
 """
     B игре хранится:
         Количество денег - .money
@@ -36,6 +37,7 @@ class Game:
             self.add_citizens()
             self.add_score()
             self.die_monkey()
+            "self.adjusts_score()"
     def pause_time(self):
         self.prev = tm()
 
@@ -63,9 +65,20 @@ class Game:
         self.score = building_scores
         self.available_capacity = house_capacity
 
+    # Обратное add citizens
     def die_monkey(self):
         if (self.score > 0):
             death_rate = self.citizens // self.score // randint(60, 100)
         else:
             death_rate = self.score * self.citizens // randint(60, 100)
         self.citizens -= death_rate
+
+    """def adjusts_score(self):
+        hospital_number = 0
+        for i in range(70):
+            for j in range(i % 2, 70, 2):
+                building = self.all_plates[i][j]
+                if (type(building) == Hospital):
+                    hospital_number += 1
+        if (hospital_number * 100 / self.citizens  < 1):
+            self.score -= 10""""
