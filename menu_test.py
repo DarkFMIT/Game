@@ -61,23 +61,36 @@ class Menu(Screen):
     # Вызывает меню построек
     # Параметры не требует
     # Нет возврата
-    def dop_menu(self):
+    def dop_menu(self, mark_pos):
+        self.mark_pos = self.centre(mark_pos)
         while self.prev != -2:
-            self.screen.window.blit(self.images[self.prev][self.page], (0, self.pos[1] - 60))
+            self.screen.window.blit(self.images[self.prev][self.page], (0, self.pos[1] - 70))
+            self.update_menu()
             pygame.display.flip()
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:
-                        self.choose(event.pos)
+                        if event.pos[1] > 570:
+                            self.choose(event.pos, self.mark_pos)
+                        if event.pos[1] < 570 and event.pos[1] > 510:
+                            self.work_with_menu(event.pos)
                 if event.type == pygame.QUIT:
                     self.prev = -2
+        self.screen.game.pause_time()
+        self.screen.prev_x = -2
         self.update_menu()
         self.screen.update_window()
 
+    
+    def work_with_menu(self, pos): 
+        if pos[0] < 60 and self.images[self.prev][self.page - 1] != 0:
+            self.page -= 1
+        elif pos[0] > 1000 and self.images[self.prev][self.page + 1] != 0:
+            self.page += 1
     # По позиции клика определяет кнопку
     # Требует позицию
     # Нет возврата
-    def choose(self, pos):
+    def choose(self, pos, mark_pos):
         if pos[0] > 490 and pos[1] > 570:
             if pos[0] < 530:
                 if self.prev == 1:
@@ -86,7 +99,7 @@ class Menu(Screen):
                 else:
                     self.prev = 1
                     self.page = 1
-                    self.dop_menu()
+                    self.dop_menu(mark_pos)
             elif pos[0] < 570:
                 if self.prev == 2:
                     self.prev = -2
@@ -94,12 +107,7 @@ class Menu(Screen):
                 else:
                     self.prev = 2
                     self.page = 1
-                    self.dop_menu()
-        if pos[1] < 570 and pos[1] > 510:
-            if pos[0] < 60 and self.images[self.prev][self.page - 1] != 0:
-                self.page -= 1
-            elif pos[0] > 1000 and self.images[self.prev][self.page + 1] != 0:
-                self.page += 1
+                    self.dop_menu(mark_pos)
 
     # В массив картинок заносит все странички меню
     # Параметры не требует
@@ -110,3 +118,13 @@ class Menu(Screen):
         self.images[2][1] = pygame.image.load(".\\resources\menus\\2_1.png")
         self.images[2][2] = pygame.image.load(".\\resources\menus\\2_2.png")
         self.images[2][3] = pygame.image.load(".\\resources\menus\\2_3.png")  
+    def centre(self, pos):
+        x = self.screen.size[0] // 2 - pos[0]
+        y = self.screen.size[1] // 2 - pos[1]
+        moving = self.screen.move([x, y])
+        self.screen.update_window()
+        x = pos[0] - moving[0]
+        y = pos[1] - moving[1]
+        new_pos = self.screen.mark_plate([x, y])
+        new_pos = self.screen.mark_plate([x, y])
+        return new_pos

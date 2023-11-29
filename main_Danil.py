@@ -40,8 +40,9 @@ while not done:
                     menu.update_menu()
             if event.button == 1:
                 if event.pos[1] > screen.size[1] - 30:
-                    menu.choose(event.pos)
-                    print(menu.prev)
+                    if (screen.prev_x != -2):
+                        menu.choose(event.pos, position)
+                        print(menu.prev)
                 else:
                     position = screen.mark_plate(event.pos)
                     menu.update_menu()

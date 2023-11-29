@@ -28,3 +28,6 @@ class Game:
         tmp = tm()
         self.time += 100 * (tmp - self.prev)
         self.prev = tmp
+
+    def pause_time(self):
+        self.prev = tm()
