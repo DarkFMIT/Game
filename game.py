@@ -1,4 +1,5 @@
 from time import time as tm
+from random import randint
 """
     B игре хранится:
         Количество денег - .money
@@ -34,18 +35,23 @@ class Game:
         if (int(self.time) % 10 == 0):
             self.add_citizens()
             self.add_score()
-
+            self.die_monkey()
     def pause_time(self):
         self.prev = tm()
 
+    # Добавление жителей
+    # На основе разниц между максимальной вместимостью и текущим населением
+    # А также обнуление роста при приближении к максимуму
     def add_citizens(self):
-        difference = self.score % 100 // 10 * (self.available_capacity - self.citizens) // 50
+        difference = self.score % 100 // 10 * (self.available_capacity - self.citizens) // randint(20, 50)
         if (difference >= (int(self.available_capacity) - int(self.citizens))): 
-            difference = 0
+            difference = randint(0, (self.available_capacity - self.citizens) )
         self.citizens += difference
 
+    # Подсчет очков от зданий
+    # Подсчет вместимости зданий
+    # А также обновление счета
     def add_score(self):
-        # Подсчет очков от зданий
         building_scores = 0
         house_capacity = 0
         for i in range(70):
@@ -54,7 +60,12 @@ class Game:
                 if type(building) != int:
                     building_scores += building.get_score()
                     house_capacity += building.get_capacity()
-        
-        # Обновление общего счета
         self.score = building_scores
         self.available_capacity = house_capacity
+
+    def die_monkey(self):
+        if (self.score > 0):
+            death_rate = self.citizens // self.score // randint(60, 100)
+        else:
+            death_rate = self.score * self.citizens // randint(60, 100)
+        self.citizens -= death_rate
