@@ -60,6 +60,7 @@ class Game:
             self.add_citizens()
             self.add_score()
             self.die_monkey() # (2) перенес формулу
+            self.check_adjust()
     def pause_time(self):
         self.prev = tm()
 
@@ -82,9 +83,12 @@ class Game:
                 building = self.all_plates[i][j]
                 if type(building) != int:
                     house_capacity += building.get_capacity()
+        self.available_capacity = house_capacity
+
+    def check_adjust(self):                
         if self.citizens > 0: # (3) проверка, что кто-то есть иначе там деление на ноль
             self.adjusts_score() # (2) сюда, чтобы до обновления
-        self.available_capacity = house_capacity
+        
 
     # Обратное add citizens
     def die_monkey(self):
@@ -95,4 +99,13 @@ class Game:
         self.citizens += death_rate // 10
 
     def adjusts_score(self):
-            Game.score -= (self.citizens - Game.hospital_number * 200) // 100 # (1) Кайф формула
+            if (self.citizens - Game.hospital_number * 200 > 0):
+                Game.score -= (self.citizens - Game.hospital_number * 200) // 100 # (1) Кайф формула
+            else:
+                buildings_score = 0
+                for i in range(70):
+                    for j in range(i % 2, 70, 2):
+                        building = self.all_plates[i][j]
+                        if type(building) != int:
+                            buildings_score += building.get_score()
+                Game.score = buildings_score
