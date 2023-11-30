@@ -1,4 +1,5 @@
 from objects_for_build import Objects_for_build
+from game import Game
 import pygame
 
 """
@@ -31,8 +32,10 @@ class House(Objects_for_build):
     def buy(self):
         if(self.can == "True"):
             self.screen.buy_building(self)
+            Game.house_number += 1
         else:
             self.screen.show_error(self.can)
+            
         
     def get_score(self):
         # Возвращает количество очков, которое приносит это здание

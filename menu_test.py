@@ -82,7 +82,7 @@ class Menu(Screen):
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:
                         if event.pos[1] > 570:
-                            self.choose(event.pos, self.mark_pos)
+                            self.choose(event.pos, mark_pos)
                         if event.pos[1] < 570 and event.pos[1] > 420:
                             plate = self.work_with_menu(event.pos)
                             if plate != 0:

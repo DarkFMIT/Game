@@ -9,6 +9,8 @@ from random import randint
 
 """
 class Game:
+    hospital_number = 0
+    house_number = 0
     # Задача начальных параметров, котрые нужны при старте игры.
     # Параметры не требует
     # Нет возврата
@@ -37,7 +39,8 @@ class Game:
             self.add_citizens()
             self.add_score()
             self.die_monkey()
-            # self.adjusts_score()
+            if self.citizens > 0:
+                self.adjusts_score()
     def pause_time(self):
         self.prev = tm()
 
@@ -73,6 +76,6 @@ class Game:
             death_rate = self.score * self.citizens // randint(60, 100)
         self.citizens -= death_rate
 
-    # def adjusts_score(self):
-    #     if (hospital_number * 100 / self.citizens  < 1):
-    #         self.score -= 10
+    def adjusts_score(self):
+        if (Game.hospital_number * 100 / self.citizens  < 1):
+            self.score -= 10

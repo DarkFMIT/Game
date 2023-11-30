@@ -1,4 +1,5 @@
 from objects_for_build import Objects_for_build
+from game import Game
 import pygame
 
 """
@@ -33,7 +34,7 @@ class Hospital(Objects_for_build):
     def buy(self):
         if(self.can == "True"):
             self.screen.buy_building(self)
-            # hospital_counter += 1
+            Game.hospital_number += 1
         else:
             self.screen.show_error(self.can)
 
