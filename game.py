@@ -22,20 +22,27 @@ from random import randint
 class Game:
     hospital_number = 0 
     hospital_capacity = 200
+    hospital_coeff = 100
     house_number = 0
     school_number = 0
     school_capacity = 200
+    school_coeff = 10000
     police_number = 0
     police_capacity = 200
+    police_coeff = 10000
     president_number = 0
     university_number = 0
     university_capacity = 200
+    university_coeff = 10000
     firestation_number = 0
     firestation_capacity = 200
+    firestation_coeff = 100000
     church_number = 0
     church_capacity = 200
+    church_coeff = 100000
     cemetery_number = 0
     cemetery_capacity = 200
+    cemetery_coeff = 10000
     factory_number = 0
     facatory_capacity = 200
     dump_number = 0
@@ -113,15 +120,15 @@ class Game:
             firestation_avaiability = self.citizens - Game.firestation_number * Game.firestation_capacity
             cemetery_avaiability = self.citizens - Game.cemetery_number * Game.cemetery_capacity
             if (hospital_avaiability > 0):
-                Game.score -= hospital_avaiability // 100 # (1) Кайф формула
+                Game.score -= hospital_avaiability // Game.hospital_coeff
             if (church_avaiability > 0):
-                Game.score -= church_avaiability // 1000000
+                Game.score -= church_avaiability // Game.church_coeff
             if (police_avaiability > 0):
-                Game.score -= police_avaiability // 1000000
+                Game.score -= police_avaiability // Game.police_coeff
             if (firestation_avaiability > 0):
-                Game.score -= firestation_avaiability // 10000000
+                Game.score -= firestation_avaiability // Game.firestation_coeff
             if (cemetery_avaiability > 0):
-                Game.score -= cemetery_avaiability // 10000000
+                Game.score -= cemetery_avaiability // Game.cemetery_coeff
             else: 
                 buildings_score = 0
                 for i in range(70):
