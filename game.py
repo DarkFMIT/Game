@@ -2,10 +2,22 @@ from time import time as tm
 from random import randint
 # from hospital import Hospital
 """
+    Глобально:
+        Количество больниц              -   hospital_number
+        Количество домов                -   house_number
+        Количество школ                 -   school_number
+        Количество полицейских уч.      -   police_number
+        Количество администраций        -   president_number
+        Количество университетов        -   university_number
+        Количество церквей              -   church_number
+        Количество кладбищ              -   cemetery_number
+        Количество пожарных станций     -   fire_number
+        Количество заводов              -   factory_number
+        Количество свалок               -   dump_number
     B игре хранится:
-        Количество денег - .money
-        Текущее время    - .time
-        Матрицу построек - .all_plates 
+        Количество денег                -   .money
+        Текущее время                   -   .time
+        Матрицу построек                -   .all_plates
 
 """
 class Game:
