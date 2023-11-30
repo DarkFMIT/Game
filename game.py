@@ -9,8 +9,8 @@ from random import randint
 
 """
 class Game:
-    hospital_number = 0
-    house_number = 0
+    hospital_number = 0 # (4) счетчик госпиталей
+    house_number = 0 # (5) счетчик домов
     # Задача начальных параметров, котрые нужны при старте игры.
     # Параметры не требует
     # Нет возврата
@@ -38,7 +38,7 @@ class Game:
         if (int(self.time) % 20 == 0):
             self.add_citizens()
             self.add_score()
-            self.die_monkey()
+            self.die_monkey() # (2) перенес формулу
     def pause_time(self):
         self.prev = tm()
 
@@ -64,8 +64,8 @@ class Game:
                     building_scores += building.get_score()
                     house_capacity += building.get_capacity()
         self.score = building_scores
-        if self.citizens > 0:
-            self.adjusts_score()
+        if self.citizens > 0: # (3) проверка, что кто-то есть иначе там деление на ноль
+            self.adjusts_score() # (2) сюда, чтобы до обновления
         self.available_capacity = house_capacity
 
     # Обратное add citizens
@@ -78,4 +78,4 @@ class Game:
 
     def adjusts_score(self):
         if ((Game.hospital_number * 100) // self.citizens  < 1):
-            self.score -= (self.citizens - Game.hospital_number * 100) // 10
+            self.score -= (self.citizens - Game.hospital_number * 100) // 10 # (1) Кайф формула

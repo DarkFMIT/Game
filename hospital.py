@@ -34,7 +34,7 @@ class Hospital(Objects_for_build):
     def buy(self):
         if(self.can == "True"):
             self.screen.buy_building(self)
-            Game.hospital_number += 1
+            Game.hospital_number += 1 # (4) счетчик госпиталей
         else:
             self.screen.show_error(self.can)
 
