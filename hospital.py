@@ -23,8 +23,6 @@ class Hospital(Objects_for_build):
         self.prise = 10000
         self.score = 500
         self.capacity = 0
-        # global hospital_counter
-        # hospital_counter = 0
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)
 
