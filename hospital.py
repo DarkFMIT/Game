@@ -22,6 +22,8 @@ class Hospital(Objects_for_build):
         self.prise = 10000
         self.score = 500
         self.capacity = 0
+        # global hospital_counter
+        # hospital_counter = 0
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)
 
@@ -31,6 +33,7 @@ class Hospital(Objects_for_build):
     def buy(self):
         if(self.can == "True"):
             self.screen.buy_building(self)
+            # hospital_counter += 1
         else:
             self.screen.show_error(self.can)
 

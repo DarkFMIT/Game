@@ -74,11 +74,5 @@ class Game:
         self.citizens -= death_rate
 
     # def adjusts_score(self):
-    #     hospital_number = 0
-    #     for i in range(70):
-    #         for j in range(i % 2, 70, 2):
-    #             building = self.all_plates[i][j]
-    #             if (type(building) == Hospital):
-    #                 hospital_number += 1
     #     if (hospital_number * 100 / self.citizens  < 1):
     #         self.score -= 10

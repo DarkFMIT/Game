@@ -66,11 +66,11 @@ while not done:
             screen.update_window()
             menu.update_menu()
             screen.prev_x = -2
-                    # ПРОВЕРКА ГОСПИТАЛЯ
+                   # ПРОВЕРКА ГОСПИТАЛЯ
         # if event.type == pygame.KEYDOWN and event.key == pygame.K_c and screen.prev_x != -2:
-            # hospital = Hospital(screen, position, "Hospital")
-            # hospital.buy()
-            # screen.update_window()
-            # menu.update_menu()
-            # screen.prev_x = -2
+        #     hospital = Hospital(screen, position, "Hospital")
+        #     hospital.buy()
+        #     screen.update_window()
+        #     menu.update_menu()
+        #     screen.prev_x = -2
     pygame.display.flip()
