@@ -11,6 +11,15 @@ from random import randint
 class Game:
     hospital_number = 0 # (4) счетчик госпиталей
     house_number = 0 # (5) счетчик домов
+    school_number = 0
+    police_number = 0
+    president_number = 0
+    university_number = 0
+    fire_number = 0
+    church_number = 0
+    cemetery_number = 0
+    factory_number = 0
+    dump_number = 0
     # Задача начальных параметров, котрые нужны при старте игры.
     # Параметры не требует
     # Нет возврата
