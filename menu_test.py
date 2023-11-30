@@ -1,4 +1,5 @@
 from screen_opti import Screen
+from game import Game
 import pygame
 """
     B муню хранится:
@@ -40,7 +41,7 @@ class Menu(Screen):
         self.text_available_capacity = pygame.font.SysFont('Comic Sans MS', 15).render(" capacity " + str(self.screen.game.available_capacity), False, (0, 0, 0))
         self.screen.window.blit(self.text_available_capacity, (200, self.pos[1] + 5))
 
-        self.text_score = pygame.font.SysFont('Comic Sans MS', 15).render(" score " + str(self.screen.game.score), False, (0, 0, 0))
+        self.text_score = pygame.font.SysFont('Comic Sans MS', 15).render(" score " + str(Game.score), False, (0, 0, 0))
         self.screen.window.blit(self.text_score, (300, self.pos[1] + 5))
 
         self.update_time()
@@ -143,10 +144,11 @@ class Menu(Screen):
     # Параметры не требует
     # Возврата нет
     def init_images(self):
-        self.razdel[1] = 0
+        self.razdel[1] = 11
         self.razdel[2] = 10
         self.images[1][1] = pygame.image.load(".\\resources\menus\\1_1.png")
         self.images[1][2] = pygame.image.load(".\\resources\menus\\1_2.png")
+        # self.images[1][3] = pygame.image.load(".\\resources\menus\\1_3.png")
         self.images[2][1] = pygame.image.load(".\\resources\menus\\2_1.png")
         self.images[2][2] = pygame.image.load(".\\resources\menus\\2_2.png")
         self.images[2][3] = pygame.image.load(".\\resources\menus\\2_3.png")  

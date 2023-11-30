@@ -32,16 +32,16 @@ class Game:
     cemetery_number = 0
     factory_number = 0
     dump_number = 0
+    score = 0
     # Задача начальных параметров, котрые нужны при старте игры.
     # Параметры не требует
     # Нет возврата
     def __init__(self):
         self.prev = tm()
         self.time = 0
-        self.money = 100000
+        self.money = 10000000
         self.citizens = 0
         self.available_capacity = 0
-        self.score = 100
         file = open('./resources/for_map.txt', 'r+')
         self.all_plates = [[0 for i in range(90)] for i in range(90)]
         for i in range(80):
@@ -67,7 +67,7 @@ class Game:
     # На основе разниц между максимальной вместимостью и текущим населением
     # А также обнуление роста при приближении к максимуму
     def add_citizens(self):
-        difference = self.score % 100 // 10 * (self.available_capacity - self.citizens) // randint(20, 50)
+        difference = Game.score % 100 // 10 * (self.available_capacity - self.citizens) // randint(20, 50)
         if (difference >= (int(self.available_capacity) - int(self.citizens))): 
             difference = randint(0, (self.available_capacity - self.citizens) )
         self.citizens += difference // 10
@@ -76,27 +76,23 @@ class Game:
     # Подсчет вместимости зданий
     # А также обновление счета
     def add_score(self):
-        building_scores = 0
         house_capacity = 0
         for i in range(70):
             for j in range(i % 2, 70, 2):
                 building = self.all_plates[i][j]
                 if type(building) != int:
-                    building_scores += building.get_score()
                     house_capacity += building.get_capacity()
-        self.score = building_scores
         if self.citizens > 0: # (3) проверка, что кто-то есть иначе там деление на ноль
             self.adjusts_score() # (2) сюда, чтобы до обновления
         self.available_capacity = house_capacity
 
     # Обратное add citizens
     def die_monkey(self):
-        if (self.score > 0):
-            death_rate = self.citizens // self.score // randint(60, 100)
+        if (Game.score > 0):
+            death_rate = self.citizens // Game.score // randint(60, 100)
         else:
-            death_rate = self.score * self.citizens // randint(60, 100)
-        self.citizens -= death_rate
+            death_rate = Game.score * self.citizens // randint(60, 100)
+        self.citizens += death_rate // 10
 
     def adjusts_score(self):
-        if ((Game.hospital_number * 100) // self.citizens  < 1):
-            self.score -= (self.citizens - Game.hospital_number * 100) // 10 # (1) Кайф формула
+            Game.score -= (self.citizens - Game.hospital_number * 200) // 100 # (1) Кайф формула

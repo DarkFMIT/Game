@@ -33,6 +33,7 @@ class House(Objects_for_build):
         if(self.can == "True"):
             self.screen.buy_building(self)
             Game.house_number += 1 # (5) счетчик домов
+            Game.score += self.score
         else:
             self.screen.show_error(self.can)
             

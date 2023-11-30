@@ -35,6 +35,7 @@ class Hospital(Objects_for_build):
         if(self.can == "True"):
             self.screen.buy_building(self)
             Game.hospital_number += 1 # (4) счетчик госпиталей
+            Game.score += self.score
         else:
             self.screen.show_error(self.can)
 
