@@ -108,4 +108,4 @@ class Game:
                         building = self.all_plates[i][j]
                         if type(building) != int:
                             buildings_score += building.get_score()
-                Game.score += abs(Game.score - buildings_score) // 10
+                Game.score += abs(Game.score - buildings_score) // 100
