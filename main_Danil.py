@@ -17,7 +17,6 @@ menu = Menu(screen)
 done = False
 screen.update_window()
 while not done:
-    print(Game.house_number)
     game.add_time()
     menu.update_menu()
     for event in pygame.event.get():
