@@ -78,4 +78,4 @@ class Game:
 
     def adjusts_score(self):
         if ((Game.hospital_number * 100) // self.citizens  < 1):
-            self.score -= 50
+            self.score -= (self.citizens - Game.hospital_number * 100) // 10
