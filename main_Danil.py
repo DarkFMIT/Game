@@ -3,12 +3,47 @@ from screen_opti import Screen
 from objects_for_build import Objects_for_build
 from house import House
 from road import Road
+from cemetery import Cemetery
+from university import University
+from school import School
+from church import Church
+from police import Police
+from firestation import Firestation
 from menu_test import  Menu
 from hospital import Hospital
+from dump import Dump
+from president import President
 import pygame
 pygame.font.init()
 
-
+def choose_build(razdel):
+    global menu, screen
+    if razdel == 1:
+        if menu.number == 1:
+            building = Cemetery(screen, position, "Cemetery")
+        if menu.number == 2:
+            building = Church(screen, position, "Church_1")
+        if menu.number == 3:
+            building = Church(screen, position, "Church_2")
+        if menu.number == 4:
+            building = Dump(screen, position, "Dump_2")
+        if menu.number == 5:
+            building = Firestation(screen, position, "Fire")
+        if menu.number == 6:
+            building = Hospital(screen, position, "Hospital")
+        if menu.number == 7:
+            building = Police(screen, position, "Police")
+        if menu.number == 8:
+            building = President(screen, position, "President")
+        if menu.number == 9:
+            building = School(screen, position, "School_1")
+        if menu.number == 10:
+            building = School(screen, position, "School_2")
+        if menu.number == 11:
+            building = University(screen, position, "University_vip")
+    if razdel == 2:
+        building = House(screen, position, f"House_{menu.number}")
+    return building
 
 
 game = Game()
@@ -44,8 +79,9 @@ while not done:
                     if (screen.prev_x != -2):
                         menu.choose(event.pos, position)
                         if menu.flag:
-                            house = House(screen, position, f"House_{menu.number}")
-                            house.buy()
+                            print(menu.num_razd, menu.number)
+                            new_build = choose_build(menu.num_razd)
+                            new_build.buy()
                             screen.update_window()
                             menu.update_menu()
                             screen.prev_x = -2

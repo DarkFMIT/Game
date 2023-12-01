@@ -20,6 +20,8 @@ class Menu(Screen):
     def __init__(self, screen):
         self.screen = screen
         self.prev = -2
+        self.flag = False
+        self.num_razd = -2
         self.page = 1
         self.pos = [0, screen.size[1] - 30]
         self.main_picture = pygame.image.load(".\\resources\Menu.png")
@@ -91,6 +93,7 @@ class Menu(Screen):
                                 if number <= self.razdel[self.prev]:
                                     self.number = number
                                     self.flag = True
+                                    self.num_razd = self.prev
                                     self.prev = -2
                 if event.type == pygame.QUIT:
                     self.prev = -2
@@ -148,7 +151,7 @@ class Menu(Screen):
         self.razdel[2] = 10
         self.images[1][1] = pygame.image.load(".\\resources\menus\\1_1.png")
         self.images[1][2] = pygame.image.load(".\\resources\menus\\1_2.png")
-        # self.images[1][3] = pygame.image.load(".\\resources\menus\\1_3.png")
+        self.images[1][3] = pygame.image.load(".\\resources\menus\\1_3.png")
         self.images[2][1] = pygame.image.load(".\\resources\menus\\2_1.png")
         self.images[2][2] = pygame.image.load(".\\resources\menus\\2_2.png")
         self.images[2][3] = pygame.image.load(".\\resources\menus\\2_3.png")  
