@@ -37,7 +37,8 @@ class Menu(Screen):
         self.screen.window.blit(self.main_picture, self.pos)
         self.screen.window.blit(self.text_money, (10, self.pos[1] + 5))
         
-        self.text_citizens = pygame.font.SysFont('Comic Sans MS', 15).render(" citizens " + str(self.screen.game.citizens), False, (0, 0, 0))
+        self.text_citizens = pygame.font.SysFont('Comic Sans MS', 15).render(" citizens " + str((self.screen.game.citizens + self.screen.game.citizens_prev) // 2), False, (0, 0, 0))
+        self.screen.game.citizens_prev = (self.screen.game.citizens + self.screen.game.citizens_prev) // 2
         self.screen.window.blit(self.text_citizens, (100, self.pos[1] + 5))
 
         self.text_available_capacity = pygame.font.SysFont('Comic Sans MS', 15).render(" capacity " + str(self.screen.game.available_capacity), False, (0, 0, 0))
