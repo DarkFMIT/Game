@@ -32,7 +32,7 @@ class Dump(Objects_for_build):
     def buy(self):
         if(self.can == "True"):
             self.screen.buy_building(self)
-            Game.church_number += 1 # (4) счетчик госпиталей
+            Game.dump_number += 1 # (4) счетчик госпиталей
             Game.score += self.score
         else:
             self.screen.show_error(self.can)
