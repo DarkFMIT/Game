@@ -48,6 +48,7 @@ class Game:
     dump_number = 0
     dump_capacity = 200
     score = 0
+
     # Задача начальных параметров, котрые нужны при старте игры.
     # Параметры не требует
     # Нет возврата
@@ -74,7 +75,8 @@ class Game:
         if (int(self.time) % 20 == 0):
             self.add_citizens()
             self.add_score()
-            self.die_monkey() # (2) перенес формулу
+            if self.citizens > 0:
+                self.die_monkey() # (2) перенес формулу
             self.check_adjust()
     def pause_time(self):
         self.prev = tm()
@@ -103,15 +105,27 @@ class Game:
     def check_adjust(self):                
         if self.citizens > 0: # (3) проверка, что кто-то есть иначе там деление на ноль
             self.adjusts_score() # (2) сюда, чтобы до обновления
-        
 
-    # Обратное add citizens
     def die_monkey(self):
+        buildings_score = 0
+        for i in range(70):
+            for j in range(i % 2, 70, 2):
+                building = self.all_plates[i][j]
+                if type(building) != int:
+                    buildings_score += building.get_score()
         if (Game.score > 0):
-            death_rate = self.citizens // Game.score // randint(60, 100)
+            ratio = (Game.score // buildings_score)
+        # Применение линейной функции для определения improvement factor
+            improvement_factor = 1 - ratio
+        # Рассчитываем базовую смертность
+            base_death_rate = self.citizens // randint(60, 100)
+        # Учитываем влияние улучшений (предполагается, что improvement_factor - это коэффициент улучшения, который может изменяться от 0 до 1)
+            improved_death_rate = base_death_rate * (1 - improvement_factor)
+            self.citizens -= improved_death_rate // 10
         else:
-            death_rate = Game.score * self.citizens // randint(60, 100)
-        self.citizens += death_rate // 10
+            death_rate = self.score * self.citizens // randint(60, 100)
+            self.citizens += death_rate // 10
+
 
     def adjusts_score(self):
             hospital_avaiability = self.citizens - Game.hospital_number * Game.hospital_capacity
@@ -121,19 +135,19 @@ class Game:
             cemetery_avaiability = self.citizens - Game.cemetery_number * Game.cemetery_capacity
             if (hospital_avaiability > 0):
                 Game.score -= hospital_avaiability // Game.hospital_coeff
-            if (church_avaiability > 0):
+            elif (church_avaiability > 0):
                 Game.score -= church_avaiability // Game.church_coeff
-            if (police_avaiability > 0):
+            elif (police_avaiability > 0):
                 Game.score -= police_avaiability // Game.police_coeff
-            if (firestation_avaiability > 0):
+            elif (firestation_avaiability > 0):
                 Game.score -= firestation_avaiability // Game.firestation_coeff
-            if (cemetery_avaiability > 0):
+            elif (cemetery_avaiability > 0):
                 Game.score -= cemetery_avaiability // Game.cemetery_coeff
-            else: 
+            else:
                 buildings_score = 0
                 for i in range(70):
                     for j in range(i % 2, 70, 2):
                         building = self.all_plates[i][j]
                         if type(building) != int:
                             buildings_score += building.get_score()
-                Game.score += abs(Game.score - buildings_score) // 100
+                Game.score += buildings_score // 10
