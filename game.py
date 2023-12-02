@@ -135,6 +135,7 @@ class Game:
             cemetery_avaiability = self.citizens - Game.cemetery_number * Game.cemetery_capacity
             if (hospital_avaiability > 0):
                 Game.score -= hospital_avaiability // Game.hospital_coeff
+                
             elif (church_avaiability > 0):
                 Game.score -= church_avaiability // Game.church_coeff
             elif (police_avaiability > 0):
