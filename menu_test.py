@@ -126,8 +126,8 @@ class Menu(Screen):
     # Требует позицию и координаты выделенного ромба
     # Нет возврата
     def choose(self, pos, mark_pos):
-        if pos[0] > 490 and pos[1] > 570:
-            if pos[0] < 530:
+        if pos[0] > 470 and pos[1] > 570:
+            if pos[0] < 510:
                 if self.prev == 1:
                     self.prev = -2
                     self.page = 1
@@ -135,12 +135,20 @@ class Menu(Screen):
                     self.prev = 1
                     self.page = 1
                     self.dop_menu(mark_pos)
-            elif pos[0] < 570:
+            elif pos[0] < 550:
                 if self.prev == 2:
                     self.prev = -2
                     self.page = 1
                 else:
                     self.prev = 2
+                    self.page = 1
+                    self.dop_menu(mark_pos)
+            elif pos[0] < 590:
+                if self.prev == 3:
+                    self.prev = -2
+                    self.page = 1
+                else:
+                    self.prev = 3
                     self.page = 1
                     self.dop_menu(mark_pos)
 
@@ -150,9 +158,13 @@ class Menu(Screen):
     def init_images(self):
         self.razdel[1] = 11
         self.razdel[2] = 10
+        self.razdel[3] = 9
         self.images[1][1] = pygame.image.load(".\\resources\menus\\1_1.png")
         self.images[1][2] = pygame.image.load(".\\resources\menus\\1_2.png")
         self.images[1][3] = pygame.image.load(".\\resources\menus\\1_3.png")
         self.images[2][1] = pygame.image.load(".\\resources\menus\\2_1.png")
         self.images[2][2] = pygame.image.load(".\\resources\menus\\2_2.png")
-        self.images[2][3] = pygame.image.load(".\\resources\menus\\2_3.png")  
+        self.images[2][3] = pygame.image.load(".\\resources\menus\\2_3.png")
+        self.images[3][1] = pygame.image.load(".\\resources\menus\\3_1.png")
+        self.images[3][2] = pygame.image.load(".\\resources\menus\\3_2.png")
+        self.images[3][3] = pygame.image.load(".\\resources\menus\\3_3.png")  
