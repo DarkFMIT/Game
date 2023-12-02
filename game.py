@@ -22,7 +22,7 @@ from random import randint
 class Game:
     hospital_number = 0 
     hospital_capacity = 200
-    hospital_coeff = 100
+    hospital_coeff = 10
     house_number = 0
     school_number = 0
     school_capacity = 200
@@ -57,6 +57,7 @@ class Game:
         self.time = 0
         self.money = 10000000
         self.citizens = 0
+        self.citizens_prev = 0
         self.available_capacity = 0
         file = open('./resources/for_map.txt', 'r+')
         self.all_plates = [[0 for i in range(90)] for i in range(90)]
@@ -72,12 +73,16 @@ class Game:
         tmp = tm()
         self.time += 100 * (tmp - self.prev)
         self.prev = tmp
+        if (int(self.time) % 10 == 0):
+            self.add_score()
+            print(self.score)
         if (int(self.time) % 20 == 0):
             self.add_citizens()
-            self.add_score()
             if self.citizens > 0:
                 self.die_monkey() # (2) перенес формулу
             self.check_adjust()
+        if (self.citizens == 0 and self.available_capacity != 0):
+            self.citizens = 2
     def pause_time(self):
         self.prev = tm()
 
@@ -85,7 +90,7 @@ class Game:
     # На основе разниц между максимальной вместимостью и текущим населением
     # А также обнуление роста при приближении к максимуму
     def add_citizens(self):
-        difference = Game.score % 100 // 10 * (self.available_capacity - self.citizens) // randint(20, 50)
+        difference = Game.score % 100 // 10 * (self.available_capacity - self.citizens) // randint(20, 25)
         if (difference >= (int(self.available_capacity) - int(self.citizens))): 
             difference = randint(0, (self.available_capacity - self.citizens) )
         self.citizens += difference // 10
@@ -123,7 +128,7 @@ class Game:
             improved_death_rate = base_death_rate * (1 - improvement_factor)
             self.citizens -= improved_death_rate // 10
         else:
-            death_rate = self.score * self.citizens // randint(60, 100)
+            death_rate = self.score * self.citizens // randint(60, 70)
             self.citizens += death_rate // 10
 
 
@@ -135,15 +140,14 @@ class Game:
             cemetery_avaiability = self.citizens - Game.cemetery_number * Game.cemetery_capacity
             if (hospital_avaiability > 0):
                 Game.score -= hospital_avaiability // Game.hospital_coeff
-                
-            elif (church_avaiability > 0):
-                Game.score -= church_avaiability // Game.church_coeff
-            elif (police_avaiability > 0):
-                Game.score -= police_avaiability // Game.police_coeff
-            elif (firestation_avaiability > 0):
-                Game.score -= firestation_avaiability // Game.firestation_coeff
-            elif (cemetery_avaiability > 0):
-                Game.score -= cemetery_avaiability // Game.cemetery_coeff
+            # elif (church_avaiability > 0):
+            #     Game.score -= church_avaiability // Game.church_coeff
+            # elif (police_avaiability > 0):
+            #     Game.score -= police_avaiability // Game.police_coeff
+            # elif (firestation_avaiability > 0):
+            #     Game.score -= firestation_avaiability // Game.firestation_coeff
+            # elif (cemetery_avaiability > 0):
+            #     Game.score -= cemetery_avaiability // Game.cemetery_coeff
             else:
                 buildings_score = 0
                 for i in range(70):
@@ -151,4 +155,4 @@ class Game:
                         building = self.all_plates[i][j]
                         if type(building) != int:
                             buildings_score += building.get_score()
-                Game.score += buildings_score // 10
+                Game.score += buildings_score // 100
