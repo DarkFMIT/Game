@@ -12,17 +12,17 @@ import pygame
         Экран                 - .screen    
         Можно ли строить      - .can   
 """
-class Dump(Objects_for_build):
+class Factory(Objects_for_build):
 
     # Создание дома для конкретной клетки
     # Требует окно и координаты
     # Возврата нет
     def __init__(self, screen, pos, icon_name):
         icon = pygame.image.load(f".\\resources\\Buildings\{icon_name}.png")
-        self.dopusc = [2]
+        self.dopusc = [0, 2]
         self.prise = 10000
-        self.score = 500
-        self.capacity = 0
+        self.score = 100
+        self.capacity = 200
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)
 
@@ -32,16 +32,16 @@ class Dump(Objects_for_build):
     def buy(self):
         if(self.can == "True"):
             self.screen.buy_building(self)
-            Game.church_number += 1 # (4) счетчик госпиталей
+            Game.house_number += 1 # (5) счетчик домов
             Game.score += self.score
         else:
             self.screen.show_error(self.can)
-
-    # Возвращает количество очков, которое приносит это здание  
+            
+        
     def get_score(self):
+        # Возвращает количество очков, которое приносит это здание
         return self.score
 
-    # Возвращает количество мест в этом здании
     def get_capacity(self):
+        # Возвращает количество мест в этом здании хуй
         return self.capacity
-    

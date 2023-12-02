@@ -26,7 +26,7 @@ def choose_build(razdel):
         if menu.number == 3:
             building = Church(screen, position, "Church_2")
         if menu.number == 4:
-            building = Dump(screen, position, "Dump_2")
+            building = Dump(screen, position, "Dump")
         if menu.number == 5:
             building = Firestation(screen, position, "Fire")
         if menu.number == 6:
