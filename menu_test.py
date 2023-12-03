@@ -47,6 +47,9 @@ class Menu(Screen):
         self.text_score = pygame.font.SysFont('Comic Sans MS', 15).render(" score " + str(Game.score), False, (0, 0, 0))
         self.screen.window.blit(self.text_score, (300, self.pos[1] + 5))
 
+        self.text_workspace = pygame.font.SysFont('Comic Sans MS', 15).render(" workspaces " + str(Game.workspace), False, (0, 0, 0))
+        self.screen.window.blit(self.text_workspace, (800, self.pos[1] + 5))
+
         self.update_time()
 
     # Обновление времени

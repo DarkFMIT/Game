@@ -48,6 +48,7 @@ class Game:
     dump_number = 0
     dump_capacity = 200
     score = 0
+    workspace = 0
 
     # Задача начальных параметров, котрые нужны при старте игры.
     # Параметры не требует
@@ -156,3 +157,13 @@ class Game:
                         if type(building) != int:
                             buildings_score += building.get_score()
                 Game.score += buildings_score // 100
+
+    def workspace_counter(self):
+        buildings_workpace = 0
+        for i in range(70):
+                for j in range(i % 2, 70, 2):
+                    building = self.all_plates[i][j]
+                    if type(building) != int:
+                        buildings_workpace += building.get_workspace()
+        Game.workspace = buildings_workpace
+                
