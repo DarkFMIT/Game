@@ -49,6 +49,7 @@ class Game:
     dump_capacity = 200
     score = 0
     workspace = 0
+    taxes = 10
 
     # Задача начальных параметров, котрые нужны при старте игры.
     # Параметры не требует
@@ -77,13 +78,17 @@ class Game:
         if (int(self.time) % 10 == 0):
             self.add_score()
             print(self.score)
+            self.add_money()
         if (int(self.time) % 20 == 0):
             self.add_citizens()
             if self.citizens > 0:
                 self.die_monkey() # (2) перенес формулу
             self.check_adjust()
+        if (int(self.time) % 1000 == 0):
+            self.workspace_counter()
         if (self.citizens == 0 and self.available_capacity != 0):
             self.citizens = 2
+        
     def pause_time(self):
         self.prev = tm()
 
@@ -139,15 +144,15 @@ class Game:
             police_avaiability = self.citizens - Game.police_number * Game.police_capacity
             firestation_avaiability = self.citizens - Game.firestation_number * Game.firestation_capacity
             cemetery_avaiability = self.citizens - Game.cemetery_number * Game.cemetery_capacity
-            if (hospital_avaiability > 0):
+            if (hospital_avaiability // Game.hospital_coeff > 0):
                 Game.score -= hospital_avaiability // Game.hospital_coeff
-            elif (church_avaiability > 0):
+            elif (church_avaiability // Game.church_coeff > 0):
                 Game.score -= church_avaiability // Game.church_coeff
-            elif (police_avaiability > 0):
+            elif (police_avaiability // Game.police_coeff > 0):
                 Game.score -= police_avaiability // Game.police_coeff
-            elif (firestation_avaiability > 0):
+            elif (firestation_avaiability // Game.firestation_coeff > 0):
                 Game.score -= firestation_avaiability // Game.firestation_coeff
-            elif (cemetery_avaiability > 0):
+            elif (cemetery_avaiability // Game.cemetery_coeff > 0):
                 Game.score -= cemetery_avaiability // Game.cemetery_coeff
             else:
                 buildings_score = 0
@@ -156,7 +161,7 @@ class Game:
                         building = self.all_plates[i][j]
                         if type(building) != int:
                             buildings_score += building.get_score()
-                Game.score += buildings_score // 100
+                Game.score += abs(Game.score - buildings_score) // 100
 
     def workspace_counter(self):
         buildings_workpace = 0
@@ -164,6 +169,8 @@ class Game:
                 for j in range(i % 2, 70, 2):
                     building = self.all_plates[i][j]
                     if type(building) != int:
-                        buildings_workpace += building.get_workspace()
+                        buildings_workpace += building.get_workplace()
         Game.workspace = buildings_workpace
-                
+
+    def add_money(self):
+        self.money += Game.workspace * Game.taxes // 100

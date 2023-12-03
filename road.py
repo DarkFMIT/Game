@@ -22,6 +22,7 @@ class Road(Objects_for_build):
         self.dopusc = [0, 2]
         self.prise = 10
         self.score = 10
+        self.default_income = -0.1
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)
         if(self.can == "True"):
@@ -109,3 +110,6 @@ class Road(Objects_for_build):
     
     def get_workplace(self):
         return 0
+    
+    def get_income(self):
+        return self.default_income
