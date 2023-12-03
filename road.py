@@ -106,3 +106,6 @@ class Road(Objects_for_build):
     def get_capacity(self):
         # Возвращает количество мест в этом здании хуй
         return 0
+    
+    def get_workplace(self):
+        return 0
