@@ -13,6 +13,7 @@ from menu_test import  Menu
 from hospital import Hospital
 from dump import Dump
 from president import President
+from factory import Factory
 import pygame
 pygame.font.init()
 
@@ -43,6 +44,8 @@ def choose_build(razdel):
             building = University(screen, position, "University_vip")
     if razdel == 2:
         building = House(screen, position, f"House_{menu.number}")
+    if razdel == 3:
+        building = Factory(screen, position, f"Factory_{menu.number}")
     return building
 
 
