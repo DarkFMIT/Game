@@ -86,6 +86,7 @@ class Game:
             self.check_adjust()
         if (int(self.time) % 1000 == 0):
             self.workspace_counter()
+            self.add_money()
         if (self.citizens == 0 and self.available_capacity != 0):
             self.citizens = 2
         
@@ -173,4 +174,10 @@ class Game:
         Game.workspace = buildings_workpace
 
     def add_money(self):
-        self.money += Game.workspace * Game.taxes // 100
+        income_counter = 0
+        for i in range(70):
+                for j in range(i % 2, 70, 2):
+                    building = self.all_plates[i][j]
+                    if type(building) != int:
+                        income_counter += building.get_income()
+        self.money += int(income_counter)
