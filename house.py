@@ -23,6 +23,7 @@ class House(Objects_for_build):
         self.prise = 10000
         self.score = 100
         self.capacity = 200
+        self.workspace = 3
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)
 
@@ -45,3 +46,6 @@ class House(Objects_for_build):
     def get_capacity(self):
         # Возвращает количество мест в этом здании хуй
         return self.capacity
+    
+    def get_workplace(self):
+        return self.workspace
