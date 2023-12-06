@@ -91,6 +91,8 @@ class Game:
     # На основе разниц между максимальной вместимостью и текущим населением
     # А также обнуление роста при приближении к максимуму
     def add_citizens(self):
+        if self.citizens > self.available_capacity:
+            self.citizens = self.available_capacity
         difference = Game.score % 100 // 10 * (self.available_capacity - self.citizens) // randint(20, 25)
         if (difference >= (int(self.available_capacity) - int(self.citizens))): 
             difference = randint(0, (self.available_capacity - self.citizens) )

@@ -146,6 +146,36 @@ class Screen(Game):
             return "Error_no_road"
         return "True"
     
+    def can_delete(self, building):
+        points = self.get_romb([building.points_for_build[0] + 60, 
+                                building.points_for_build[1] + 170])
+        flag = True
+        if (not(type(self.game.all_plates[points[0] - 1][points[1] - 1]).__name__ == "Road") 
+            and not(type(self.game.all_plates[points[0] - 1][points[1] - 1]) == int)):
+            flag = flag and (type(self.game.all_plates[points[0] - 2][points[1] - 2]).__name__ == "Road"
+                             or type(self.game.all_plates[points[0]][points[1] - 2]).__name__ == "Road"
+                             or type(self.game.all_plates[points[0] - 2][points[1]]).__name__ == "Road")
+            
+        if (not(type(self.game.all_plates[points[0] - 1][points[1] + 1]).__name__ == "Road") 
+            and not(type(self.game.all_plates[points[0] - 1][points[1] + 1]) == int)):
+            flag = flag and (type(self.game.all_plates[points[0] - 2][points[1]]).__name__ == "Road"
+                             or type(self.game.all_plates[points[0]][points[1] + 2]).__name__ == "Road"
+                             or type(self.game.all_plates[points[0] - 2][points[1] + 2]).__name__ == "Road")
+            
+        if (not(type(self.game.all_plates[points[0] + 1][points[1] + 1]).__name__ == "Road") 
+            and not(type(self.game.all_plates[points[0] + 1][points[1] + 1]) == int)):
+            flag = flag and (type(self.game.all_plates[points[0] + 2][points[1] + 2]).__name__ == "Road"
+                             or type(self.game.all_plates[points[0]][points[1] + 2]).__name__ == "Road"
+                             or type(self.game.all_plates[points[0] + 2][points[1]]).__name__ == "Road")
+            
+        if (not(type(self.game.all_plates[points[0] + 1][points[1] - 1]).__name__ == "Road") 
+            and not(type(self.game.all_plates[points[0] + 1][points[1] - 1]) == int)):
+            flag = flag and (type(self.game.all_plates[points[0] + 2][points[1] - 2]).__name__ == "Road"
+                             or type(self.game.all_plates[points[0]][points[1] - 2]).__name__ == "Road"
+                             or type(self.game.all_plates[points[0] + 2][points[1]]).__name__ == "Road")
+        
+        return flag
+    
     # Функция покупки здания. Меняет цены, сохраняет данные о здании в матрице
     # Требует объект типа "Строение"
     # Возврата нет
@@ -153,8 +183,21 @@ class Screen(Game):
         points = self.get_romb([building.points_for_build[0] + 60, 
                                 building.points_for_build[1] + 170])
         self.game.money -= building.prise
+        building.dopusc_of_plate = self.game.all_plates[points[0]][points[1]]
         self.game.all_plates[points[0]][points[1]] = building    
     
+    def delete_build(self, building):
+        points = self.get_romb([building.points_for_build[0] + 60, 
+                                building.points_for_build[1] + 170])
+        if(type(building).__name__ != "Road"):
+            self.game.money += building.prise // 10
+            self.game.all_plates[points[0]][points[1]] = building.dopusc_of_plate  
+        else:
+            if self.can_delete(building):
+                building.goodbuy()
+                self.game.money += building.prise // 10
+                self.game.all_plates[points[0]][points[1]] = building.dopusc_of_plate  
+
 
     # Выводит в центра экрана ошибку, которая закрывается по нажатию
     # Требует название ошибки

@@ -105,6 +105,13 @@ while not done:
             screen.update_window()
             menu.update_menu()
             screen.prev_x = -2
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_d and screen.prev_x != -2:
+            points = screen.get_romb(position)
+            if (not(type(game.all_plates[points[0]][points[1]]) == int)):
+                screen.delete_build(game.all_plates[points[0]][points[1]])
+            screen.update_window()
+            menu.update_menu()
+            screen.prev_x = -2
                    # ПРОВЕРКА ГОСПИТАЛЯ
         if event.type == pygame.KEYDOWN and event.key == pygame.K_c and screen.prev_x != -2:
             hospital = Hospital(screen, position, "Hospital")

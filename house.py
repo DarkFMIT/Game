@@ -20,6 +20,7 @@ class House(Objects_for_build):
     def __init__(self, screen, pos, icon_name):
         icon = pygame.image.load(f".\\resources\\Buildings\{icon_name}.png")
         self.dopusc = [0, 2]
+        self.dopusc_of_plate = 0
         self.prise = 10000
         self.score = 100
         self.capacity = 200
@@ -37,6 +38,9 @@ class House(Objects_for_build):
             Game.score += self.score
         else:
             self.screen.show_error(self.can)
+    def goodbuy(self):
+        Game.church_number -= 1 # (4) счетчик госпиталей
+        Game.score -= self.score
             
         
     def get_score(self):
