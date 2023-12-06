@@ -39,6 +39,21 @@ class Screen(Game):
                 if type(tmp) != int:
                     self.window.blit(tmp.icon, tmp.points_for_build)
 
+    # Выводит в центра экрана ошибку, которая закрывается по нажатию
+    # Требует название ошибки
+    # Возврата нет
+    def show_error(self, error_name):                                          # [480 * 250]
+        error = pygame.image.load(f".\\resources\Errors\{error_name}.png")
+        self.window.blit(error, ((self.size[0] - 480) // 2, 
+                                 (self.size[1] - 250) // 2))
+        pygame.display.flip()
+        done = False
+        while not done:
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    done = True
+        self.update_window()
+                
     # Пермещение поля на некоторые координаты
     # Требует массив из сдвига по х и сдвига по y
     # возвращает относительный сдвиг
@@ -126,6 +141,18 @@ class Screen(Game):
                     [[x - 60, y], [x, y + 30], [x + 60, y]], 2)
             return[x, y]
     
+    '''         ПОКУПКА ЗДАНИЙ           '''
+
+    # Функция покупки здания. Меняет цены, сохраняет данные о здании в матрице
+    # Требует объект типа "Строение"
+    # Возврата нет
+    def buy_building(self, building):
+        points = self.get_romb([building.points_for_build[0] + 60, 
+                                building.points_for_build[1] + 170])
+        self.game.money -= building.prise
+        building.dopusc_of_plate = self.game.all_plates[points[0]][points[1]]
+        self.game.all_plates[points[0]][points[1]] = building    
+    
     # Проверяет возможно ли построить здание
     # Требует постройку
     # Возвращает ошибку либо "True"
@@ -146,6 +173,35 @@ class Screen(Game):
             return "Error_no_road"
         return "True"
     
+    '''            ПРОДАЖА ЗДАНИЙ        '''
+
+    # Функция продажи здания. Меняет цены, удаляет данные о здании из матрице
+    # Требует объект типа "Строение"
+    # Возврата нет
+    def delete_build(self, building):
+        points = self.get_romb([building.points_for_build[0] + 60, 
+                                building.points_for_build[1] + 170])
+        if(type(building).__name__ != "Road"):
+            building.goodbuy()
+            self.game.money += building.prise // 10
+            self.game.all_plates[points[0]][points[1]] = building.dopusc_of_plate  
+        else:
+            if self.can_delete(building):
+                building.goodbuy()
+                self.game.money += building.prise // 10
+                self.game.all_plates[points[0]][points[1]] = building.dopusc_of_plate  
+                if(type(self.game.all_plates[points[0] + 1][points[1] + 1]).__name__ == "Road"):
+                    self.game.all_plates[points[0] + 1][points[1] + 1].icon = self.game.all_plates[points[0] + 1][points[1] + 1].choose_icon([points[0] + 1, points[1] + 1])
+                if(type(self.game.all_plates[points[0] + 1][points[1] - 1]).__name__ == "Road"):
+                    self.game.all_plates[points[0] + 1][points[1] - 1].icon = self.game.all_plates[points[0] + 1][points[1] - 1].choose_icon([points[0] + 1, points[1] - 1])
+                if(type(self.game.all_plates[points[0] - 1][points[1] - 1]).__name__ == "Road"):
+                    self.game.all_plates[points[0] - 1][points[1] - 1].icon = self.game.all_plates[points[0] - 1][points[1] - 1].choose_icon([points[0] - 1, points[1] - 1])
+                if(type(self.game.all_plates[points[0] - 1][points[1] + 1]).__name__ == "Road"):
+                    self.game.all_plates[points[0] - 1][points[1] + 1].icon = self.game.all_plates[points[0] - 1][points[1] + 1].choose_icon([points[0] - 1, points[1] + 1])
+    
+    # Проверяет возможно ли удалить постройку
+    # Требует постройку
+    # Возвращает True/False
     def can_delete(self, building):
         points = self.get_romb([building.points_for_build[0] + 60, 
                                 building.points_for_build[1] + 170])
@@ -176,51 +232,6 @@ class Screen(Game):
         
         return flag
     
-    # Функция покупки здания. Меняет цены, сохраняет данные о здании в матрице
-    # Требует объект типа "Строение"
-    # Возврата нет
-    def buy_building(self, building):
-        points = self.get_romb([building.points_for_build[0] + 60, 
-                                building.points_for_build[1] + 170])
-        self.game.money -= building.prise
-        building.dopusc_of_plate = self.game.all_plates[points[0]][points[1]]
-        self.game.all_plates[points[0]][points[1]] = building    
-    
-    def delete_build(self, building):
-        points = self.get_romb([building.points_for_build[0] + 60, 
-                                building.points_for_build[1] + 170])
-        if(type(building).__name__ != "Road"):
-            building.goodbuy()
-            self.game.money += building.prise // 10
-            self.game.all_plates[points[0]][points[1]] = building.dopusc_of_plate  
-        else:
-            if self.can_delete(building):
-                building.goodbuy()
-                self.game.money += building.prise // 10
-                self.game.all_plates[points[0]][points[1]] = building.dopusc_of_plate  
-                if(type(self.game.all_plates[points[0] + 1][points[1] + 1]).__name__ == "Road"):
-                    self.game.all_plates[points[0] + 1][points[1] + 1].icon = self.game.all_plates[points[0] + 1][points[1] + 1].choose_icon([points[0] + 1, points[1] + 1])
-                if(type(self.game.all_plates[points[0] + 1][points[1] - 1]).__name__ == "Road"):
-                    self.game.all_plates[points[0] + 1][points[1] - 1].icon = self.game.all_plates[points[0] + 1][points[1] - 1].choose_icon([points[0] + 1, points[1] - 1])
-                if(type(self.game.all_plates[points[0] - 1][points[1] - 1]).__name__ == "Road"):
-                    self.game.all_plates[points[0] - 1][points[1] - 1].icon = self.game.all_plates[points[0] - 1][points[1] - 1].choose_icon([points[0] - 1, points[1] - 1])
-                if(type(self.game.all_plates[points[0] - 1][points[1] + 1]).__name__ == "Road"):
-                    self.game.all_plates[points[0] - 1][points[1] + 1].icon = self.game.all_plates[points[0] - 1][points[1] + 1].choose_icon([points[0] - 1, points[1] + 1])
 
 
-    # Выводит в центра экрана ошибку, которая закрывается по нажатию
-    # Требует название ошибки
-    # Возврата нет
-    def show_error(self, error_name):                                          # [480 * 250]
-        error = pygame.image.load(f".\\resources\Errors\{error_name}.png")
-        self.window.blit(error, ((self.size[0] - 480) // 2, 
-                                 (self.size[1] - 250) // 2))
-        pygame.display.flip()
-        done = False
-        while not done:
-            for event in pygame.event.get():
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    done = True
-        self.update_window()
-                
         
