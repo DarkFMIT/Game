@@ -41,7 +41,7 @@ class School(Objects_for_build):
             self.screen.show_error(self.can)
 
     def goodbuy(self):
-        Game.church_number -= 1 # (4) счетчик госпиталей
+        Game.school_number -= 1 # (4) счетчик госпиталей
         Game.score -= self.score
 
     # Возвращает количество очков, которое приносит это здание  

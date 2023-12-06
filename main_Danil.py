@@ -82,7 +82,6 @@ while not done:
                     if (screen.prev_x != -2):
                         menu.choose(event.pos, position)
                         if menu.flag:
-                            print(menu.num_razd, menu.number)
                             new_build = choose_build(menu.num_razd)
                             new_build.buy()
                             screen.update_window()

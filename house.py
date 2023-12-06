@@ -40,8 +40,9 @@ class House(Objects_for_build):
         else:
             self.screen.show_error(self.can)
     def goodbuy(self):
-        Game.church_number -= 1 # (4) счетчик госпиталей
-        Game.score -= self.score
+        Game.score -= self.score * 2
+        Game.house_number -= 1 # (4) счетчик госпиталей
+
             
         
     def get_score(self):

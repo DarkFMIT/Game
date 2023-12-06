@@ -190,6 +190,7 @@ class Screen(Game):
         points = self.get_romb([building.points_for_build[0] + 60, 
                                 building.points_for_build[1] + 170])
         if(type(building).__name__ != "Road"):
+            building.goodbuy()
             self.game.money += building.prise // 10
             self.game.all_plates[points[0]][points[1]] = building.dopusc_of_plate  
         else:

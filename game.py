@@ -57,7 +57,7 @@ class Game:
     def __init__(self):
         self.prev = tm()
         self.time = 0
-        self.money = 10000000
+        self.money = 1000000
         self.citizens = 0
         self.citizens_prev = 0
         self.available_capacity = 0
@@ -77,7 +77,6 @@ class Game:
         self.prev = tmp
         if (int(self.time) % 10 == 0):
             self.add_score()
-            print(self.score)
             self.add_money()
         if (int(self.time) % 20 == 0):
             self.add_citizens()
@@ -87,7 +86,7 @@ class Game:
         if (int(self.time) % 1000 == 0):
             self.workspace_counter()
             self.add_money()
-        if (self.citizens == 0 and self.available_capacity != 0):
+        if (self.citizens <= 0 and self.available_capacity != 0):
             self.citizens = 2
         
     def pause_time(self):

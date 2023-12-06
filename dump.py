@@ -39,6 +39,9 @@ class Dump(Objects_for_build):
             Game.score += self.score
         else:
             self.screen.show_error(self.can)
+    def goodbuy(self):
+        Game.score -= self.score * 2
+        Game.dump_number -= 1 # (4) счетчик госпиталей
 
     # Возвращает количество очков, которое приносит это здание  
     def get_score(self):
