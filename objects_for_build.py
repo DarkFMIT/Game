@@ -17,3 +17,6 @@ class Objects_for_build(Screen):
         y = points[1] * 30 + screen.Y_glob - 140
         self.points_for_build = [x, y]
         self.icon = icon
+    
+    def __str__(self) -> str:
+        

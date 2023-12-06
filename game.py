@@ -1,4 +1,5 @@
 from time import time as tm
+from pygame import image
 from random import randint
 """
     Глобально:
@@ -61,6 +62,7 @@ class Game:
         self.citizens = 0
         self.citizens_prev = 0
         self.available_capacity = 0
+        self.debuf_warning = image.load("./resources/Warnings/empty.png")
         file = open('./resources/for_map.txt', 'r+')
         self.all_plates = [[0 for i in range(90)] for i in range(90)]
         for i in range(80):
@@ -148,15 +150,21 @@ class Game:
             cemetery_avaiability = self.citizens - Game.cemetery_number * Game.cemetery_capacity
             if (hospital_avaiability // Game.hospital_coeff > 0):
                 Game.score -= hospital_avaiability // Game.hospital_coeff
+                self.debuf_warning = image.load("./resources/Warnings/hospital.png")
             elif (church_avaiability // Game.church_coeff > 0):
                 Game.score -= church_avaiability // Game.church_coeff
+                self.debuf_warning = image.load("./resources/Warnings/Church.png")
             elif (police_avaiability // Game.police_coeff > 0):
                 Game.score -= police_avaiability // Game.police_coeff
+                self.debuf_warning = image.load("./resources/Warnings/Police.png")
             elif (firestation_avaiability // Game.firestation_coeff > 0):
                 Game.score -= firestation_avaiability // Game.firestation_coeff
+                self.debuf_warning = image.load("./resources/Warnings/Firestation.png")
             elif (cemetery_avaiability // Game.cemetery_coeff > 0):
                 Game.score -= cemetery_avaiability // Game.cemetery_coeff
+                self.debuf_warning = image.load("./resources/Warnings/Cemetery.png")
             else:
+                self.debuf_warning = image.load("./resources/Warnings/empty.png")
                 buildings_score = 0
                 for i in range(70):
                     for j in range(i % 2, 70, 2):

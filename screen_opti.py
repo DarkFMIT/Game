@@ -38,6 +38,7 @@ class Screen(Game):
                 tmp = self.game.all_plates[j][i]
                 if type(tmp) != int:
                     self.window.blit(tmp.icon, tmp.points_for_build)
+        self.window.blit(self.game.debuf_warning, (20, 20))
 
     # Выводит в центра экрана ошибку, которая закрывается по нажатию
     # Требует название ошибки
