@@ -50,6 +50,13 @@ class Menu(Screen):
         self.text_workspace = pygame.font.SysFont('Comic Sans MS', 15).render(" workspaces " + str(Game.workspace), False, (0, 0, 0))
         self.screen.window.blit(self.text_workspace, (800, self.pos[1] + 5))
 
+        if Game.income_counter >= 0:
+            good = pygame.image.load("./resources/positive_diffirence.png")
+            self.screen.window.blit(good, (2, self.pos[1] + 5))
+        else:
+            bad = pygame.image.load("./resources/negative_diffirence.png")
+            self.screen.window.blit(bad, (2, self.pos[1] + 5))
+
         self.update_time()
 
     # Обновление времени

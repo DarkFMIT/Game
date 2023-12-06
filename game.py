@@ -21,35 +21,36 @@ from random import randint
 """
 class Game:
     hospital_number = 0 
-    hospital_capacity = 200
-    hospital_coeff = 10
+    hospital_capacity = 20000
+    hospital_coeff = 100
     house_number = 0
     school_number = 0
-    school_capacity = 200
+    school_capacity = 20000
     school_coeff = 10000
     police_number = 0
-    police_capacity = 200
+    police_capacity = 20000
     police_coeff = 10000
     president_number = 0
     university_number = 0
-    university_capacity = 200
-    university_coeff = 10000
+    university_capacity = 80000
+    university_coeff = 100000
     firestation_number = 0
-    firestation_capacity = 200
-    firestation_coeff = 100000
+    firestation_capacity = 20000
+    firestation_coeff = 10000
     church_number = 0
-    church_capacity = 200
+    church_capacity = 80000
     church_coeff = 100000
     cemetery_number = 0
-    cemetery_capacity = 200
+    cemetery_capacity = 30000
     cemetery_coeff = 10000
     factory_number = 0
-    facatory_capacity = 200
+    facatory_capacity = 150
     dump_number = 0
-    dump_capacity = 200
+    dump_capacity = 100000
     score = 0
     workspace = 0
     taxes = 10
+    income_counter = 0
 
     # Задача начальных параметров, котрые нужны при старте игры.
     # Параметры не требует
@@ -57,7 +58,7 @@ class Game:
     def __init__(self):
         self.prev = tm()
         self.time = 0
-        self.money = 1000000
+        self.money = 500000
         self.citizens = 0
         self.citizens_prev = 0
         self.available_capacity = 0
@@ -75,10 +76,10 @@ class Game:
         tmp = tm()
         self.time += 100 * (tmp - self.prev)
         self.prev = tmp
-        if (int(self.time) % 10 == 0):
+        if (int(self.time) % 100 == 0):
             self.add_score()
             self.add_money()
-        if (int(self.time) % 20 == 0):
+        if (int(self.time) % 100 == 0):
             self.add_citizens()
             if self.citizens > 0:
                 self.die_monkey() # (2) перенес формулу
@@ -175,10 +176,9 @@ class Game:
         Game.workspace = buildings_workpace
 
     def add_money(self):
-        income_counter = 0
         for i in range(70):
                 for j in range(i % 2, 70, 2):
                     building = self.all_plates[i][j]
                     if type(building) != int:
-                        income_counter += building.get_income()
-        self.money += int(income_counter)
+                        Game.income_counter += building.get_income()
+        self.money += int(Game.income_counter)
