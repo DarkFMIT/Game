@@ -40,7 +40,7 @@ class Police(Objects_for_build):
         else:
             self.screen.show_error(self.can)
     def goodbuy(self):
-        Game.score -= self.score * 2
+        Game.score -= self.score 
         Game.police_number -= 1 # (4) счетчик госпиталей
 
     # Возвращает количество очков, которое приносит это здание  

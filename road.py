@@ -101,7 +101,7 @@ class Road(Objects_for_build):
         else:
             self.screen.show_error(self.can)
     def goodbuy(self):
-        Game.score -= self.score * 2
+        Game.score -= self.score 
 
     def get_score(self):
         # Возвращает количество очков, которое приносит это здание
