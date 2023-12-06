@@ -25,6 +25,7 @@ class Factory(Objects_for_build):
         self.score = 100
         self.capacity = 200
         self.workspace  = 50
+        self.default_income = 50
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)
 
@@ -50,3 +51,6 @@ class Factory(Objects_for_build):
     
     def get_workplace(self):
         return self.workspace
+    
+    def get_income(self):
+        return self.default_income
