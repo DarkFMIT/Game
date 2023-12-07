@@ -51,6 +51,8 @@ class Game:
     score = 0
     workspace = 0
     taxes = 10
+    income_counter = 0
+    
 
     # Задача начальных параметров, котрые нужны при старте игры.
     # Параметры не требует
@@ -69,6 +71,16 @@ class Game:
             str = file.readline().split()
             for j in range(len(str)):
                 self.all_plates[i][j] = int(str[j])
+    
+    def __str__(self):
+        output = ""
+        output += str(self.time) + "|"
+        output += str(self.money) + "|"
+        output += str(self.citizens) + "|"
+        output += str(self.citizens_prev) + "|"
+        output += str(self.available_capacity)
+        return output
+        
 
     # Добавляет время основываясь на раазнице компьютерного времени
     # Параметры не требует
@@ -190,3 +202,13 @@ class Game:
                     if type(building) != int:
                         income_counter += building.get_income()
         self.money += int(income_counter)
+
+    def load(self, str):
+        list_atributes = str.split("|")
+        self.time = float(list_atributes[0])
+        self.money = int(list_atributes[1])
+        self.citizens = int(list_atributes[2])
+        self.citizens_prev = int(list_atributes[3])
+        self.available_capacity = int(list_atributes[4])
+
+

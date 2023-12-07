@@ -48,6 +48,87 @@ def choose_build(razdel):
         building = Factory(screen, position, f"Factory_{menu.number}")
     return building
 
+def save_game(screen):
+    with open("./resources/Save/save", "wt") as file:
+        file.write(str(screen.game) + "\n")
+        file.write(str(screen) + "\n")
+        for i in range(80):
+            for j in range(80):
+                if type(screen.game.all_plates[i][j]) != int:
+                    file.write(str(screen.game.all_plates[i][j]) + "\n")
+
+def load_game(screen):
+    with open("./resources/Save/save", "rt") as file:
+        list_save = file.readlines()
+    screen.game.load(list_save[0])
+    screen.load(list_save[1])
+    for i in range(2, len(list_save)):
+        match list_save[i].split("|")[0]:
+            case "House":
+                building = House(screen, [0, 0], "Dump")
+            case "Cemetery":
+                building = Cemetery(screen, [0, 0], "Dump")
+            case "Church":
+                building = Church(screen, [0, 0], "Dump")
+            case "Dump":
+                building = Dump(screen, [0, 0], "Dump")
+            case "Factory":
+                building = Factory(screen, [0, 0], "Dump")
+            case "Firestation":
+                building = Firestation(screen, [0, 0], "Dump")
+            case "Hospital":
+                building = Hospital(screen, [0, 0], "Dump")
+            case "Police":
+                building = Police(screen, [0, 0], "Dump")
+            case "President":
+                building = President(screen, [0, 0], "Dump")
+            case "School":
+                building = School(screen, [0, 0], "Dump")
+            case "University":
+                building = University(screen, [0, 0], "Dump")
+            case "Road":
+                building = Road(screen, [0, 0])
+        
+        building.load(list_save[i])
+        tmp_build = building.points_for_build
+        tmp_build[0] += 60
+        tmp_build[1] += 170
+        place_in_matrix = screen.get_romb(tmp_build)
+        tmp_build[0] -= 60
+        tmp_build[1] -= 170
+        print(place_in_matrix)
+        screen.game.all_plates[place_in_matrix[0]][place_in_matrix[1]] = building
+
+
+def choose_class(name_of_class, screen):
+    match name_of_class:
+        case "House":
+            building = House(screen, [0, 0], "Dump")
+        case "Cemetery":
+            building = Cemetery(screen, [0, 0], "Dump")
+        case "Church":
+            building = Church(screen, [0, 0], "Dump")
+        case "Dump":
+            building = Dump(screen, [0, 0], "Dump")
+        case "Factory":
+            building = Factory(screen, [0, 0], "Dump")
+        case "Firestation":
+            building = Firestation(screen, [0, 0], "Dump")
+        case "Hospital":
+            building = Hospital(screen, [0, 0], "Dump")
+        case "Police":
+            building = Police(screen, [0, 0], "Dump")
+        case "President":
+            building = President(screen, [0, 0], "Dump")
+        case "School":
+            building = School(screen, [0, 0], "Dump")
+        case "University":
+            building = University(screen, [0, 0], "Dump")
+        case "Road":
+            building = Road(screen, [0, 0])
+    return building
+
+
 
 game = Game()
 screen = Screen(game)
@@ -60,6 +141,12 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             done = True
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_F7:
+            save_game(screen)
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_t:
+            load_game(screen)
+            screen.update_window()
+            menu.update_menu()
         if event.type == pygame.QUIT:
             done = True
         if event.type == pygame.MOUSEBUTTONDOWN:

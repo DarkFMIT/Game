@@ -23,6 +23,7 @@ class School(Objects_for_build):
         self.dopusc_of_plate = 0
         self.prise = 10000
         self.score = 500
+        self.icon_name = icon_name
         self.capacity = 0
         self.workspace = 450
         self.default_income = -200

@@ -28,6 +28,17 @@ class Screen(Game):
         self.prev_x = -2
         self.prev_y = -2
 
+    def __str__(self):
+            output = ""
+            output += str(self.X_glob) + "|"
+            output += str(self.Y_glob)
+            return output
+    
+    def load(self, str):
+        list_atributes = str.split("|")
+        self.X_glob = int(list_atributes[0])
+        self.Y_glob = int(list_atributes[1])   
+    
     # Обновление экрана. Отрисовка всех фиксированных объектов
     # Параметров не требует
     # Нет возврата
@@ -37,7 +48,10 @@ class Screen(Game):
             for j in range(i % 2, 60, 2):
                 tmp = self.game.all_plates[j][i]
                 if type(tmp) != int:
-                    self.window.blit(tmp.icon, tmp.points_for_build)
+                    try:
+                        self.window.blit(tmp.icon, tmp.points_for_build)
+                    except:
+                        print(tmp.icon)
         self.window.blit(self.game.debuf_warning, (20, 20))
 
     # Выводит в центра экрана ошибку, которая закрывается по нажатию
@@ -137,6 +151,7 @@ class Screen(Game):
             if type(self.game.all_plates[points[0]][points[1]]) != int:
                 something = self.game.all_plates[points[0]][points[1]]
                 self.window.blit(something.icon, (something.points_for_build[0], something.points_for_build[1]))
+                print(self.game.all_plates[points[0]][points[1]])
             if self.game.all_plates[points[0]][points[1]] != 1:
                 pygame.draw.lines(self.window, (0,0,0), False,
                     [[x - 60, y], [x, y + 30], [x + 60, y]], 2)

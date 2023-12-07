@@ -23,11 +23,15 @@ class President(Objects_for_build):
         self.dopusc_of_plate = 0
         self.prise = 10000
         self.score = 50000
+        self.icon_name = icon_name
         self.capacity = 0
         self.workspace = 1000
         self.default_income = -500
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)
+    
+    def __str__(self) -> str:
+        return super().__str__()
 
     # Покупка здания
     # Параметры не требует

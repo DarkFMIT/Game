@@ -23,11 +23,15 @@ class House(Objects_for_build):
         self.dopusc_of_plate = 0
         self.prise = 10000
         self.score = 100
+        self.icon_name = icon_name
         self.capacity = 200
         self.workspace = 3
         self.default_income = 10
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)
+    
+    def __str__(self) -> str:
+        return super().__str__()
 
     # Покупка здания
     # Параметры не требует
@@ -58,3 +62,6 @@ class House(Objects_for_build):
     
     def get_income(self):
         return self.default_income
+    
+    def load(self, str):
+        return super().load(str)
