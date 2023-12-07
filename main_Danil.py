@@ -63,32 +63,7 @@ def load_game(screen):
     screen.game.load(list_save[0])
     screen.load(list_save[1])
     for i in range(2, len(list_save)):
-        match list_save[i].split("|")[0]:
-            case "House":
-                building = House(screen, [0, 0], "Dump")
-            case "Cemetery":
-                building = Cemetery(screen, [0, 0], "Dump")
-            case "Church":
-                building = Church(screen, [0, 0], "Dump")
-            case "Dump":
-                building = Dump(screen, [0, 0], "Dump")
-            case "Factory":
-                building = Factory(screen, [0, 0], "Dump")
-            case "Firestation":
-                building = Firestation(screen, [0, 0], "Dump")
-            case "Hospital":
-                building = Hospital(screen, [0, 0], "Dump")
-            case "Police":
-                building = Police(screen, [0, 0], "Dump")
-            case "President":
-                building = President(screen, [0, 0], "Dump")
-            case "School":
-                building = School(screen, [0, 0], "Dump")
-            case "University":
-                building = University(screen, [0, 0], "Dump")
-            case "Road":
-                building = Road(screen, [0, 0])
-        
+        building = choose_class(list_save[i].split("|")[0], screen)
         building.load(list_save[i])
         tmp_build = building.points_for_build
         tmp_build[0] += 60
@@ -144,6 +119,8 @@ while not done:
         if event.type == pygame.KEYDOWN and event.key == pygame.K_F7:
             save_game(screen)
         if event.type == pygame.KEYDOWN and event.key == pygame.K_t:
+            game = Game()
+            screen = Screen(game)
             load_game(screen)
             screen.update_window()
             menu.update_menu()

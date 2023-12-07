@@ -205,15 +205,16 @@ class Screen(Game):
             if self.can_delete(building):
                 building.goodbuy()
                 self.game.money += building.prise // 10
+                game = self.game
                 self.game.all_plates[points[0]][points[1]] = building.dopusc_of_plate  
-                if(type(self.game.all_plates[points[0] + 1][points[1] + 1]).__name__ == "Road"):
-                    self.game.all_plates[points[0] + 1][points[1] + 1].icon = self.game.all_plates[points[0] + 1][points[1] + 1].choose_icon([points[0] + 1, points[1] + 1])
-                if(type(self.game.all_plates[points[0] + 1][points[1] - 1]).__name__ == "Road"):
-                    self.game.all_plates[points[0] + 1][points[1] - 1].icon = self.game.all_plates[points[0] + 1][points[1] - 1].choose_icon([points[0] + 1, points[1] - 1])
-                if(type(self.game.all_plates[points[0] - 1][points[1] - 1]).__name__ == "Road"):
-                    self.game.all_plates[points[0] - 1][points[1] - 1].icon = self.game.all_plates[points[0] - 1][points[1] - 1].choose_icon([points[0] - 1, points[1] - 1])
-                if(type(self.game.all_plates[points[0] - 1][points[1] + 1]).__name__ == "Road"):
-                    self.game.all_plates[points[0] - 1][points[1] + 1].icon = self.game.all_plates[points[0] - 1][points[1] + 1].choose_icon([points[0] - 1, points[1] + 1])
+                if(type(game.all_plates[points[0] + 1][points[1] + 1]).__name__ == "Road"):
+                    game.all_plates[points[0] + 1][points[1] + 1].icon_name, game.all_plates[points[0] + 1][points[1] + 1].icon = game.all_plates[points[0] + 1][points[1] + 1].choose_icon([points[0] + 1, points[1] + 1])
+                if(type(game.all_plates[points[0] + 1][points[1] - 1]).__name__ == "Road"):
+                    game.all_plates[points[0] + 1][points[1] + 1].icon_name, game.all_plates[points[0] + 1][points[1] - 1].icon = game.all_plates[points[0] + 1][points[1] - 1].choose_icon([points[0] + 1, points[1] - 1])
+                if(type(game.all_plates[points[0] - 1][points[1] - 1]).__name__ == "Road"):
+                    game.all_plates[points[0] - 1][points[1] - 1].icon_name, game.all_plates[points[0] - 1][points[1] - 1].icon = game.all_plates[points[0] - 1][points[1] - 1].choose_icon([points[0] - 1, points[1] - 1])
+                if(type(game.all_plates[points[0] - 1][points[1] + 1]).__name__ == "Road"):
+                    game.all_plates[points[0] - 1][points[1] + 1].icon_name, game.all_plates[points[0] - 1][points[1] + 1].icon = game.all_plates[points[0] - 1][points[1] + 1].choose_icon([points[0] - 1, points[1] + 1])
     
     # Проверяет возможно ли удалить постройку
     # Требует постройку
