@@ -26,40 +26,45 @@ class House(Objects_for_build):
         self.icon_name = icon_name
         self.capacity = 200
         self.workspace = 3
-        self.default_income = 10
+        self.default_income = -1
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)
     
+    # Вывод данных класса
     def __str__(self) -> str:
         return super().__str__()
 
     # Покупка здания
     # Параметры не требует
     # Возврата нет
+    # Cчетчик госпиталей
+    # Cчетчик домов
     def buy(self):
         if(self.can == "True"):
             self.screen.buy_building(self)
-            Game.house_number += 1 # (5) счетчик домов
+            Game.house_number += 1 
             Game.score += self.score
         else:
             self.screen.show_error(self.can)
+
+    # Удаление здания
     def goodbuy(self):
         Game.score -= self.score 
-        Game.house_number -= 1 # (4) счетчик госпиталей
-
+        Game.house_number -= 1 
             
-        
+    # Возвращает количество очков, которое приносит это здание
     def get_score(self):
-        # Возвращает количество очков, которое приносит это здание
         return self.score
 
+    # Возвращает количество мест в этом здании
     def get_capacity(self):
-        # Возвращает количество мест в этом здании хуй
         return self.capacity
     
+    # Возвращает количество рабочих мест
     def get_workplace(self):
         return self.workspace
     
+    # Возвращает доход здания
     def get_income(self):
         return self.default_income
     

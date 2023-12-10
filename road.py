@@ -32,6 +32,7 @@ class Road(Objects_for_build):
             icon_name, self.icon = self.choose_icon(points)
         self.icon_name = icon_name
     
+    # Вывод данных класса
     def __str__(self) -> str:
         return super().__str__()
     
@@ -98,29 +99,36 @@ class Road(Objects_for_build):
         self.icon = icon
         self.icon_name = icon_type
 
-    # Покупка дороги
+    # Покупка здания
     # Параметры не требует
     # Возврата нет
+    # Cчетчик госпиталей
+    # Cчетчик домов
     def buy(self):
         if(self.can == "True"):
             self.screen.buy_building(self)
+            Game.house_number += 1 
             Game.score += self.score
         else:
             self.screen.show_error(self.can)
+
+    # Удаление здания
     def goodbuy(self):
         Game.score -= self.score 
-
+            
+    # Возвращает количество очков, которое приносит это здание
     def get_score(self):
-        # Возвращает количество очков, которое приносит это здание
         return self.score
 
+    # Возвращает количество мест в этом здании
     def get_capacity(self):
-        # Возвращает количество мест в этом здании хуй
         return 0
     
+    # Возвращает количество рабочих мест
     def get_workplace(self):
         return 0
     
+    # Возвращает доход здания
     def get_income(self):
         return self.default_income
     

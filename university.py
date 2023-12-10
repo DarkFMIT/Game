@@ -30,24 +30,29 @@ class University(Objects_for_build):
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)
 
+    # Вывод данных класса
     def __str__(self) -> str:
         return super().__str__()
-    
-    # Покупка здания    
+
+    # Покупка здания
     # Параметры не требует
     # Возврата нет
+    # Cчетчик госпиталей
+    # Cчетчик домов
     def buy(self):
         if(self.can == "True"):
             self.screen.buy_building(self)
-            Game.church_number += 1 # (4) счетчик госпиталей
+            Game.house_number += 1 
             Game.score += self.score
         else:
             self.screen.show_error(self.can)
-    def goodbuy(self):
-        Game.score -= self.score
-        Game.university_number -= 1 # (4) счетчик госпиталей
 
-    # Возвращает количество очков, которое приносит это здание  
+    # Удаление здания
+    def goodbuy(self):
+        Game.score -= self.score 
+        Game.university_number -= 1 
+            
+    # Возвращает количество очков, которое приносит это здание
     def get_score(self):
         return self.score
 
@@ -55,8 +60,10 @@ class University(Objects_for_build):
     def get_capacity(self):
         return self.capacity
     
+    # Возвращает количество рабочих мест
     def get_workplace(self):
         return self.workspace
-
+    
+    # Возвращает доход здания
     def get_income(self):
         return self.default_income

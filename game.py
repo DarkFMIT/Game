@@ -21,6 +21,7 @@ from random import randint
 
 """
 class Game:
+
     hospital_number = 0 
     hospital_capacity = 200
     hospital_coeff = 10
@@ -52,7 +53,7 @@ class Game:
     workspace = 0
     taxes = 10
     income_counter = 0
-    
+    salary = 4
 
     # Задача начальных параметров, котрые нужны при старте игры.
     # Параметры не требует
@@ -98,7 +99,7 @@ class Game:
                 self.die_monkey() # (2) перенес формулу
             self.check_adjust()
         if (int(self.time) % 1000 == 0):
-            self.workspace_counter()
+            self.work_logic()
             self.add_money()
         if (self.citizens <= 0 and self.available_capacity != 0):
             self.citizens = 2
@@ -185,7 +186,7 @@ class Game:
                             buildings_score += building.get_score()
                 Game.score += abs(Game.score - buildings_score) // 100
 
-    def workspace_counter(self):
+    def work_logic(self):
         buildings_workpace = 0
         for i in range(70):
                 for j in range(i % 2, 70, 2):
@@ -193,6 +194,10 @@ class Game:
                     if type(building) != int:
                         buildings_workpace += building.get_workplace()
         Game.workspace = buildings_workpace
+        if Game.workspace > self.citizens // 2 and Game.workspace != 0:
+            self.money += self.citizens // 2 * Game.salary
+        elif Game.workspace < self.citizens // 2 and Game.workspace != 0:
+            self.money += Game.workspace * Game.salary
 
     def add_money(self):
         income_counter = 0
