@@ -17,8 +17,9 @@ from factory import Factory
 import pygame
 pygame.font.init()
 
+menu = None
+screen = None
 def choose_build(razdel):
-    global menu, screen
     if razdel == 1:
         if menu.number == 1:
             building = Cemetery(screen, position, "Cemetery")
@@ -44,6 +45,7 @@ def choose_build(razdel):
             building = University(screen, position, "University_vip")
     if razdel == 2:
         building = House(screen, position, f"House_{menu.number}")
+        building.prise = menu.number * building.prise
     if razdel == 3:
         building = Factory(screen, position, f"Factory_{menu.number}")
     return building

@@ -17,6 +17,8 @@ class Factory(Objects_for_build):
     # Создание дома для конкретной клетки
     # Требует окно и координаты
     # Возврата нет
+    
+
     def __init__(self, screen, pos, icon_name):
         icon = pygame.image.load(f".\\resources\\Buildings\{icon_name}.png")
         self.dopusc = [0, 2]
