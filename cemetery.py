@@ -31,14 +31,14 @@ class Cemetery(Objects_for_build):
         self.can = self.screen.can_build(self)
     
     # Вывод данных класса
+    # Параметры не требует
+    # Возвращает строку
     def __str__(self) -> str:
         return super().__str__()
 
     # Покупка здания
     # Параметры не требует
     # Возврата нет
-    # Cчетчик госпиталей
-    # Cчетчик домов
     def buy(self):
         if(self.can == "True"):
             self.screen.buy_building(self)
@@ -59,16 +59,19 @@ class Cemetery(Objects_for_build):
     # Возвращает число
     def get_score(self):
         return self.score
+  
     # Возвращает количество мест в этом здании
     # Парметры не требует
     # Возвращает число
     def get_capacity(self):
         return self.capacity
+  
     # Возвращает количество рабочих мест
     # Парметры не требует
     # Возвращает число
     def get_workplace(self):
         return self.workspace
+ 
     # Возвращает доход здания
     # Парметры не требует
     # Возвращает число

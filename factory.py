@@ -14,11 +14,9 @@ import pygame
 """
 class Factory(Objects_for_build):
 
-    # Создание дома для конкретной клетки
+    # Создание завода для конкретной клетки
     # Требует окно и координаты
     # Возврата нет
-    
-
     def __init__(self, screen, pos, icon_name):
         icon = pygame.image.load(f".\\resources\\Buildings\{icon_name}.png")
         self.dopusc = [0, 2]
@@ -33,14 +31,14 @@ class Factory(Objects_for_build):
         self.can = self.screen.can_build(self)
     
     # Вывод данных класса
+    # Параметры не требует
+    # Возвращает строку
     def __str__(self) -> str:
         return super().__str__()
 
     # Покупка здания
     # Параметры не требует
     # Возврата нет
-    # Cчетчик госпиталей
-    # Cчетчик домов
     def buy(self):
         if(self.can == "True"):
             self.screen.buy_building(self)
@@ -67,11 +65,13 @@ class Factory(Objects_for_build):
     # Возвращает число
     def get_capacity(self):
         return self.capacity
+   
     # Возвращает количество рабочих мест
     # Парметры не требует
     # Возвращает число
     def get_workplace(self):
         return self.workspace
+ 
     # Возвращает доход здания
     # Парметры не требует
     # Возвращает число

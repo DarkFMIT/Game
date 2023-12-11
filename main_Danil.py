@@ -14,6 +14,7 @@ from hospital import Hospital
 from dump import Dump
 from president import President
 from factory import Factory
+from pump import Pump
 import pygame
 pygame.font.init()
 
@@ -28,7 +29,7 @@ def choose_build(razdel):
         if menu.number == 3:
             building = Church(screen, position, "Church_2")
         if menu.number == 4:
-            building = Dump(screen, position, "Dump")
+            building = Pump(screen, position, "Pump")
         if menu.number == 5:
             building = Firestation(screen, position, "Fire")
         if menu.number == 6:
@@ -86,8 +87,8 @@ def choose_class(name_of_class, screen):
             building = Cemetery(screen, [0, 0], "Dump")
         case "Church":
             building = Church(screen, [0, 0], "Dump")
-        case "Dump":
-            building = Dump(screen, [0, 0], "Dump")
+        case "Pump":
+            building = Pump(screen, [0, 0], "Pump")
         case "Factory":
             building = Factory(screen, [0, 0], "Dump")
         case "Firestation":
