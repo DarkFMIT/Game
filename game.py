@@ -23,43 +23,43 @@ from random import randint
 class Game:
 
     hospital_number = 0 
-    hospital_capacity = 10000
+    hospital_capacity = 2000
     hospital_coeff = 10
 
     house_number = 0
 
     school_number = 0
-    school_capacity = 2000
-    school_coeff = 1000
+    school_capacity = 10000
+    school_coeff = 10
 
     police_number = 0
     police_capacity = 20000
-    police_coeff = 1000
+    police_coeff = 10
 
     president_number = 0
 
     university_number = 0
     university_capacity = 80000
-    university_coeff = 10000
+    university_coeff = 10
 
     firestation_number = 0
     firestation_capacity = 8000
-    firestation_coeff = 1000
+    firestation_coeff = 10
 
     church_number = 0
     church_capacity = 20000
-    church_coeff = 1000
+    church_coeff = 10
 
     cemetery_number = 0
     cemetery_capacity = 10000
-    cemetery_coeff = 1000
+    cemetery_coeff = 10
 
     factory_number = 0
     facatory_capacity = 200
 
     dump_number = 0
     dump_capacity = 10000
-    dump_coeff = 1000
+    dump_coeff = 10
 
     pump_number = 0
     pump_capacity = 20000
@@ -73,7 +73,7 @@ class Game:
 
     income_counter = 0
 
-    salary = 40
+    salary = 4
 
     # Задача начальных параметров, котрые нужны при старте игры.
     # Параметры не требует
@@ -118,9 +118,6 @@ class Game:
             if self.citizens > 0:
                 self.die_monkey() # (2) перенес формулу
             self.check_adjust()
-        if (int(self.time) % 1000 == 0):
-            self.add_money()
-            self.work_logic()
         if (self.citizens <= 0 and self.available_capacity != 0):
             self.citizens = 2
         
@@ -188,7 +185,7 @@ class Game:
             if (hospital_avaiability // Game.hospital_coeff > 0):
                 Game.score -= hospital_avaiability // Game.hospital_coeff
                 self.debuf_warning = image.load("./resources/Warnings/hospital.png")
-            elif (church_avaiability // Game.church_coeff > 0):
+            elif (church_avaiability // Game.church_coeff > 0 and self.citizens > 10000):
                 Game.score -= church_avaiability // Game.church_coeff
                 self.debuf_warning = image.load("./resources/Warnings/Church.png")
             elif (police_avaiability // Game.police_coeff > 0):
@@ -222,8 +219,14 @@ class Game:
                             buildings_score += building.get_score()
                 Game.score += abs(Game.score - buildings_score) // 100
 
-    def work_logic(self):
+    def add_money(self):
+        Game.income_counter = 0
         buildings_workpace = 0
+        for i in range(70):
+                for j in range(i % 2, 70, 2):
+                    building = self.all_plates[i][j]
+                    if type(building) != int:
+                        Game.income_counter += building.get_income()
         for i in range(70):
                 for j in range(i % 2, 70, 2):
                     building = self.all_plates[i][j]
@@ -234,15 +237,7 @@ class Game:
             Game.income_counter += self.citizens // 2 * Game.salary
         elif Game.workspace < self.citizens // 2 and Game.workspace != 0:
             Game.income_counter += Game.workspace * Game.salary
-
-    def add_money(self):
-        Game.income_counter = 0
-        for i in range(70):
-                for j in range(i % 2, 70, 2):
-                    building = self.all_plates[i][j]
-                    if type(building) != int:
-                        Game.income_counter += building.get_income()
-        self.money += int(Game.income_counter)
+        self.money += int(Game.income_counter)     
 
     def load(self, str):
         list_atributes = str.split("|")
