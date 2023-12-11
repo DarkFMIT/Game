@@ -43,7 +43,9 @@ def choose_build(razdel):
         if menu.number == 10:
             building = School(screen, position, "School_2")
         if menu.number == 11:
-            building = University(screen, position, "University_vip")
+            building = University(screen, position, "University_vip")    
+        if menu.number == 12:
+            building = Dump(screen, position, "Dump")
     if razdel == 2:
         building = House(screen, position, f"House_{menu.number}")
         building.prise = menu.number * building.prise

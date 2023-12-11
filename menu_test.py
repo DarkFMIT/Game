@@ -166,7 +166,7 @@ class Menu(Screen):
     # Параметры не требует
     # Возврата нет
     def init_images(self):
-        self.razdel[1] = 11
+        self.razdel[1] = 12
         self.razdel[2] = 10
         self.razdel[3] = 9
         self.images[1][1] = pygame.image.load(".\\resources\menus\\1_1.png")
