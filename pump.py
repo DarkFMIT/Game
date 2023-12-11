@@ -42,7 +42,7 @@ class Pump(Objects_for_build):
     def buy(self):
         if(self.can == "True"):
             self.screen.buy_building(self)
-            Game.Pump_number += 1 
+            Game.pump_number += 1 
             Game.score += self.score
         else:
             self.screen.show_error(self.can)

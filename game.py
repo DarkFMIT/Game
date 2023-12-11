@@ -113,7 +113,7 @@ class Game:
         if (int(self.time) % 100 == 0):
             self.add_score()
             self.add_money()
-        if (int(self.time) % 200 == 0):
+        if (int(self.time) % 50 == 0):
             self.add_citizens()
             if self.citizens > 0:
                 self.die_monkey() # (2) перенес формулу
@@ -208,7 +208,7 @@ class Game:
                 self.debuf_warning = image.load("./resources/Warnings/Dump.png")
             elif (pump_avaiability // Game.pump_coeff > 0):
                 Game.score -= pump_avaiability // Game.pump_coeff
-                self.debuf_warning = image.load("./resources/Warnings/Dump.png")
+                self.debuf_warning = image.load("./resources/Warnings/Water.png")
             elif (university_avaiability // Game.university_coeff > 0):
                 Game.score -= university_avaiability // Game.university_coeff
                 self.debuf_warning = image.load("./resources/Warnings/School.png")
