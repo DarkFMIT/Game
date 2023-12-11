@@ -44,7 +44,7 @@ class Factory(Objects_for_build):
     def buy(self):
         if(self.can == "True"):
             self.screen.buy_building(self)
-            Game.house_number += 1 
+            Game.factory_number += 1 
             Game.score += self.score
         else:
             self.screen.show_error(self.can)

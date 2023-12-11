@@ -28,12 +28,18 @@ class Screen(Game):
         self.prev_x = -2
         self.prev_y = -2
 
+    # Вывод данных экрана
+    # Параметров не требует
+    # Возвращает строку "{X_glob|Y_glob}"
     def __str__(self):
             output = ""
             output += str(self.X_glob) + "|"
             output += str(self.Y_glob)
             return output
     
+    # Ввод данных в класс
+    # Требует строку формата "{X_glob|Y_glob}"
+    # Нет возврата
     def load(self, str):
         list_atributes = str.split("|")
         self.X_glob = int(list_atributes[0])
@@ -57,7 +63,7 @@ class Screen(Game):
     # Выводит в центра экрана ошибку, которая закрывается по нажатию
     # Требует название ошибки
     # Возврата нет
-    def show_error(self, error_name):                                          # [480 * 250]
+    def show_error(self, error_name):                                         
         error = pygame.image.load(f".\\resources\Errors\{error_name}.png")
         self.window.blit(error, ((self.size[0] - 1002), 
                                  (self.size[1] - 250) // 2))
@@ -210,7 +216,7 @@ class Screen(Game):
                 if(type(game.all_plates[points[0] + 1][points[1] + 1]).__name__ == "Road"):
                     game.all_plates[points[0] + 1][points[1] + 1].icon_name, game.all_plates[points[0] + 1][points[1] + 1].icon = game.all_plates[points[0] + 1][points[1] + 1].choose_icon([points[0] + 1, points[1] + 1])
                 if(type(game.all_plates[points[0] + 1][points[1] - 1]).__name__ == "Road"):
-                    game.all_plates[points[0] + 1][points[1] + 1].icon_name, game.all_plates[points[0] + 1][points[1] - 1].icon = game.all_plates[points[0] + 1][points[1] - 1].choose_icon([points[0] + 1, points[1] - 1])
+                    game.all_plates[points[0] + 1][points[1] - 1].icon_name, game.all_plates[points[0] + 1][points[1] - 1].icon = game.all_plates[points[0] + 1][points[1] - 1].choose_icon([points[0] + 1, points[1] - 1])
                 if(type(game.all_plates[points[0] - 1][points[1] - 1]).__name__ == "Road"):
                     game.all_plates[points[0] - 1][points[1] - 1].icon_name, game.all_plates[points[0] - 1][points[1] - 1].icon = game.all_plates[points[0] - 1][points[1] - 1].choose_icon([points[0] - 1, points[1] - 1])
                 if(type(game.all_plates[points[0] - 1][points[1] + 1]).__name__ == "Road"):
@@ -249,6 +255,3 @@ class Screen(Game):
         
         return flag
     
-
-
-        

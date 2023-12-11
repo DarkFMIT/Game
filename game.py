@@ -156,6 +156,7 @@ class Game:
 
 
     def adjusts_score(self):
+            print(self.citizens, Game.hospital_number, Game.hospital_capacity)
             hospital_avaiability = self.citizens - Game.hospital_number * Game.hospital_capacity
             church_avaiability = self.citizens - Game.church_number * Game.church_capacity
             police_avaiability = self.citizens - Game.police_number * Game.police_capacity
