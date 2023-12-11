@@ -125,6 +125,8 @@ while not done:
             screen = Screen(game)
             load_game(screen)
             screen.update_window()
+            menu.screen = screen
+            menu.game = game
             menu.update_menu()
         if event.type == pygame.QUIT:
             done = True
