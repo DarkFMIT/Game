@@ -49,6 +49,7 @@ def choose_build(razdel):
     if razdel == 2:
         building = House(screen, position, f"House_{menu.number}")
         building.prise = menu.number * building.prise
+        building.capacity = menu.number * building.capacity
     if razdel == 3:
         building = Factory(screen, position, f"Factory_{menu.number}")
         building.workspace = menu.number * building.workspace

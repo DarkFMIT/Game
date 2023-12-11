@@ -113,14 +113,14 @@ class Game:
         if (int(self.time) % 100 == 0):
             self.add_score()
             self.add_money()
-        if (int(self.time) % 50 == 0):
+        if (int(self.time) % 20 == 0):
             self.add_citizens()
             if self.citizens > 0:
                 self.die_monkey() # (2) перенес формулу
             self.check_adjust()
         if (int(self.time) % 1000 == 0):
-            self.work_logic()
             self.add_money()
+            self.work_logic()
         if (self.citizens <= 0 and self.available_capacity != 0):
             self.citizens = 2
         
@@ -231,9 +231,9 @@ class Game:
                         buildings_workpace += building.get_workplace()
         Game.workspace = buildings_workpace
         if Game.workspace > self.citizens // 2 and Game.workspace != 0:
-            self.money += self.citizens // 2 * Game.salary
+            Game.income_counter += self.citizens // 2 * Game.salary
         elif Game.workspace < self.citizens // 2 and Game.workspace != 0:
-            self.money += Game.workspace * Game.salary
+            Game.income_counter += Game.workspace * Game.salary
 
     def add_money(self):
         Game.income_counter = 0
