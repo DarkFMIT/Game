@@ -59,7 +59,7 @@ class Screen(Game):
     # Возврата нет
     def show_error(self, error_name):                                          # [480 * 250]
         error = pygame.image.load(f".\\resources\Errors\{error_name}.png")
-        self.window.blit(error, ((self.size[0] - 480) // 2, 
+        self.window.blit(error, ((self.size[0] - 1002), 
                                  (self.size[1] - 250) // 2))
         pygame.display.flip()
         done = False
