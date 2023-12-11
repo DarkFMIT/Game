@@ -205,8 +205,8 @@ class Game:
                 for j in range(i % 2, 70, 2):
                     building = self.all_plates[i][j]
                     if type(building) != int:
-                        income_counter += building.get_income()
-        self.money += int(income_counter)
+                        Game.income_counter += building.get_income()
+        self.money += int( income_counter)
 
     def load(self, str):
         list_atributes = str.split("|")

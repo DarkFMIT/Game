@@ -12,47 +12,51 @@ import pygame
         Экран                 - .screen    
         Можно ли строить      - .can   
 """
-class Cemetery(Objects_for_build):
+class Pump(Objects_for_build):
 
-    # Создание кладбище для конкретной клетки
+    # Создание водокачки для конкретной клетки
     # Требует окно и координаты
     # Возврата нет
     def __init__(self, screen, pos, icon_name):
         icon = pygame.image.load(f".\\resources\\Buildings\{icon_name}.png")
-        self.dopusc = [0, 2]
+        self.dopusc = [2]
         self.dopusc_of_plate = 0
         self.prise = 10000
         self.score = 500
         self.icon_name = icon_name
         self.capacity = 0
-        self.workspace = 10
-        self.default_income = -20
+        self.workspace = 5
+        self.default_income = -5
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)
     
     # Вывод данных класса
+    # Параметры не требует
+    # Возвращает строку
     def __str__(self) -> str:
         return super().__str__()
 
     # Покупка здания
     # Параметры не требует
     # Возврата нет
-    # Cчетчик госпиталей
-    # Cчетчик домов
     def buy(self):
         if(self.can == "True"):
             self.screen.buy_building(self)
-            Game.cemetery_number += 1 
+            Game.Pump_number += 1 
             Game.score += self.score
         else:
             self.screen.show_error(self.can)
 
     # Удаление здания
+    # Парметры не требует
+    #  Возврата нет
     def goodbuy(self):
         Game.score -= self.score 
-        Game.cemetery_number -= 1 
+        Game.dump_number -= 1 
             
     # Возвращает количество очков, которое приносит это здание
+    # Парметры не требует
+    # Возвращает число
     def get_score(self):
         return self.score
 
