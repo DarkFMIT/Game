@@ -23,46 +23,46 @@ from random import randint
 class Game:
 
     hospital_number = 0 
-    hospital_capacity = 2000
+    hospital_capacity = 10000
     hospital_coeff = 10
 
     house_number = 0
 
     school_number = 0
-    school_capacity = 200
-    school_coeff = 10000
+    school_capacity = 2000
+    school_coeff = 1000
 
     police_number = 0
-    police_capacity = 200
-    police_coeff = 10000
+    police_capacity = 20000
+    police_coeff = 1000
 
     president_number = 0
 
     university_number = 0
-    university_capacity = 200
+    university_capacity = 80000
     university_coeff = 10000
 
     firestation_number = 0
-    firestation_capacity = 200
-    firestation_coeff = 100000
+    firestation_capacity = 8000
+    firestation_coeff = 1000
 
     church_number = 0
-    church_capacity = 200
-    church_coeff = 100000
+    church_capacity = 20000
+    church_coeff = 1000
 
     cemetery_number = 0
-    cemetery_capacity = 200
-    cemetery_coeff = 10000
+    cemetery_capacity = 10000
+    cemetery_coeff = 1000
 
     factory_number = 0
     facatory_capacity = 200
 
     dump_number = 0
-    dump_capacity = 20000
+    dump_capacity = 10000
     dump_coeff = 1000
 
     pump_number = 0
-    pump_capacity = 2000
+    pump_capacity = 20000
     pump_coeff = 100
 
     score = 0
@@ -73,7 +73,7 @@ class Game:
 
     income_counter = 0
 
-    salary = 4
+    salary = 40
 
     # Задача начальных параметров, котрые нужны при старте игры.
     # Параметры не требует
@@ -110,10 +110,10 @@ class Game:
         tmp = tm()
         self.time += 100 * (tmp - self.prev)
         self.prev = tmp
-        if (int(self.time) % 10 == 0):
+        if (int(self.time) % 100 == 0):
             self.add_score()
             self.add_money()
-        if (int(self.time) % 20 == 0):
+        if (int(self.time) % 200 == 0):
             self.add_citizens()
             if self.citizens > 0:
                 self.die_monkey() # (2) перенес формулу
