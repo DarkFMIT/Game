@@ -26,7 +26,7 @@ class Factory(Objects_for_build):
         self.prise = 10000
         self.score = 100
         self.icon_name = icon_name
-        self.capacity = 200
+        self.capacity = 0
         self.workspace  = 50
         self.default_income = -10
         super().__init__(screen, pos, icon)

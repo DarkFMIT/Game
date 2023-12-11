@@ -48,6 +48,7 @@ def choose_build(razdel):
         building.prise = menu.number * building.prise
     if razdel == 3:
         building = Factory(screen, position, f"Factory_{menu.number}")
+        building.workspace = menu.number * building.workspace
     return building
 
 def save_game(screen):
