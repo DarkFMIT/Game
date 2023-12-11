@@ -48,23 +48,31 @@ class House(Objects_for_build):
             self.screen.show_error(self.can)
 
     # Удаление здания
+    # Парметры не требует
+    # Возврата нет
     def goodbuy(self):
         Game.score -= self.score 
         Game.house_number -= 1 
             
     # Возвращает количество очков, которое приносит это здание
+    # Парметры не требует
+    # Возвращает число
     def get_score(self):
         return self.score
 
     # Возвращает количество мест в этом здании
+    # Парметры не требует
+    # Возвращает число
     def get_capacity(self):
         return self.capacity
-    
     # Возвращает количество рабочих мест
+    # Парметры не требует
+    # Возвращает число
     def get_workplace(self):
         return self.workspace
-    
     # Возвращает доход здания
+    # Парметры не требует
+    # Возвращает число
     def get_income(self):
         return self.default_income
     

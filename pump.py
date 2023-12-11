@@ -49,7 +49,7 @@ class Pump(Objects_for_build):
 
     # Удаление здания
     # Парметры не требует
-    #  Возврата нет
+    # Возврата нет
     def goodbuy(self):
         Game.score -= self.score 
         Game.dump_number -= 1 
@@ -61,13 +61,19 @@ class Pump(Objects_for_build):
         return self.score
 
     # Возвращает количество мест в этом здании
+    # Парметры не требует
+    # Возвращает число
     def get_capacity(self):
         return self.capacity
     
     # Возвращает количество рабочих мест
+    # Парметры не требует
+    # Возвращает число
     def get_workplace(self):
         return self.workspace
     
     # Возвращает доход здания
+    # Парметры не требует
+    # Возвращает число
     def get_income(self):
         return self.default_income
