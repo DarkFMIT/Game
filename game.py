@@ -23,36 +23,56 @@ from random import randint
 class Game:
 
     hospital_number = 0 
-    hospital_capacity = 200
+    hospital_capacity = 2000
     hospital_coeff = 10
+
     house_number = 0
+
     school_number = 0
     school_capacity = 200
     school_coeff = 10000
+
     police_number = 0
     police_capacity = 200
     police_coeff = 10000
+
     president_number = 0
+
     university_number = 0
     university_capacity = 200
     university_coeff = 10000
+
     firestation_number = 0
     firestation_capacity = 200
     firestation_coeff = 100000
+
     church_number = 0
     church_capacity = 200
     church_coeff = 100000
+
     cemetery_number = 0
     cemetery_capacity = 200
     cemetery_coeff = 10000
+
     factory_number = 0
     facatory_capacity = 200
+
     dump_number = 0
-    dump_capacity = 200
+    dump_capacity = 20000
+    dump_coeff = 1000
+
+    pump_number = 0
+    pump_capacity = 2000
+    pump_coeff = 100
+
     score = 0
+
     workspace = 0
+
     taxes = 10
+
     income_counter = 0
+
     salary = 4
 
     # Задача начальных параметров, котрые нужны при старте игры.
@@ -161,6 +181,10 @@ class Game:
             police_avaiability = self.citizens - Game.police_number * Game.police_capacity
             firestation_avaiability = self.citizens - Game.firestation_number * Game.firestation_capacity
             cemetery_avaiability = self.citizens - Game.cemetery_number * Game.cemetery_capacity
+            dump_avaiability = self.citizens - Game.dump_number * Game.dump_capacity
+            school_avaiability = self.citizens - Game.school_number * Game.school_capacity
+            university_avaiability = self.citizens - Game.university_number * Game.university_capacity
+            pump_avaiability = self.citizens - Game.pump_number * Game.pump_capacity
             if (hospital_avaiability // Game.hospital_coeff > 0):
                 Game.score -= hospital_avaiability // Game.hospital_coeff
                 self.debuf_warning = image.load("./resources/Warnings/hospital.png")
@@ -176,6 +200,18 @@ class Game:
             elif (cemetery_avaiability // Game.cemetery_coeff > 0):
                 Game.score -= cemetery_avaiability // Game.cemetery_coeff
                 self.debuf_warning = image.load("./resources/Warnings/Cemetery.png")
+            elif (school_avaiability // Game.school_coeff > 0):
+                Game.score -= school_avaiability // Game.school_coeff
+                self.debuf_warning = image.load("./resources/Warnings/School.png")
+            elif (dump_avaiability // Game.dump_coeff > 0):
+                Game.score -= dump_avaiability // Game.dump_coeff
+                self.debuf_warning = image.load("./resources/Warnings/Dump.png")
+            elif (pump_avaiability // Game.pump_coeff > 0):
+                Game.score -= pump_avaiability // Game.pump_coeff
+                self.debuf_warning = image.load("./resources/Warnings/Dump.png")
+            elif (university_avaiability // Game.university_coeff > 0):
+                Game.score -= university_avaiability // Game.university_coeff
+                self.debuf_warning = image.load("./resources/Warnings/School.png")
             else:
                 self.debuf_warning = image.load("./resources/Warnings/empty.png")
                 buildings_score = 0
@@ -200,13 +236,13 @@ class Game:
             self.money += Game.workspace * Game.salary
 
     def add_money(self):
-        income_counter = 0
+        Game.income_counter = 0
         for i in range(70):
                 for j in range(i % 2, 70, 2):
                     building = self.all_plates[i][j]
                     if type(building) != int:
-                        income_counter += building.get_income()
-        self.money += int(income_counter)
+                        Game.income_counter += building.get_income()
+        self.money += int(Game.income_counter)
 
     def load(self, str):
         list_atributes = str.split("|")
