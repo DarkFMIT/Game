@@ -14,7 +14,7 @@ import pygame
 """
 class University(Objects_for_build):
 
-    # Создание дома для конкретной клетки
+    # Создание университета для конкретной клетки
     # Требует окно и координаты
     # Возврата нет
     def __init__(self, screen, pos, icon_name):
@@ -25,38 +25,55 @@ class University(Objects_for_build):
         self.score = 500
         self.icon_name = icon_name
         self.capacity = 0
-        self.workspace = 4000
+        self.workspace = 50
         self.default_income = -100
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)
 
+    # Вывод данных класса
+    # Параметры не требует
+    # Возвращает строку
     def __str__(self) -> str:
         return super().__str__()
-    
-    # Покупка здания    
+
+    # Покупка здания
     # Параметры не требует
     # Возврата нет
     def buy(self):
         if(self.can == "True"):
             self.screen.buy_building(self)
-            Game.church_number += 1 # (4) счетчик госпиталей
+            Game.university_number += 1 
             Game.score += self.score
         else:
             self.screen.show_error(self.can)
-    def goodbuy(self):
-        Game.score -= self.score
-        Game.university_number -= 1 # (4) счетчик госпиталей
 
-    # Возвращает количество очков, которое приносит это здание  
+    # Удаление здания
+    # Парметры не требует
+    # Возврата нет
+    def goodbuy(self):
+        Game.score -= self.score 
+        Game.university_number -= 1 
+            
+    # Возвращает количество очков, которое приносит это здание
+    # Парметры не требует
+    # Возвращает число
     def get_score(self):
         return self.score
 
     # Возвращает количество мест в этом здании
+    # Парметры не требует
+    # Возвращает число
     def get_capacity(self):
         return self.capacity
-    
+ 
+    # Возвращает количество рабочих мест
+    # Парметры не требует
+    # Возвращает число
     def get_workplace(self):
         return self.workspace
-
+  
+    # Возвращает доход здания
+    # Парметры не требует
+    # Возвращает число
     def get_income(self):
         return self.default_income

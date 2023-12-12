@@ -14,11 +14,13 @@ from hospital import Hospital
 from dump import Dump
 from president import President
 from factory import Factory
+from pump import Pump
 import pygame
 pygame.font.init()
 
+menu = None
+screen = None
 def choose_build(razdel):
-    global menu, screen
     if razdel == 1:
         if menu.number == 1:
             building = Cemetery(screen, position, "Cemetery")
@@ -27,7 +29,7 @@ def choose_build(razdel):
         if menu.number == 3:
             building = Church(screen, position, "Church_2")
         if menu.number == 4:
-            building = Dump(screen, position, "Dump")
+            building = Pump(screen, position, "Pump")
         if menu.number == 5:
             building = Firestation(screen, position, "Fire")
         if menu.number == 6:
@@ -41,11 +43,18 @@ def choose_build(razdel):
         if menu.number == 10:
             building = School(screen, position, "School_2")
         if menu.number == 11:
-            building = University(screen, position, "University_vip")
+            building = University(screen, position, "University_vip")    
+        if menu.number == 12:
+            building = Dump(screen, position, "Dump")
     if razdel == 2:
         building = House(screen, position, f"House_{menu.number}")
+        building.prise = int(menu.number ** 0.8 * building.prise)
+        building.capacity = int(menu.number ** 0.5 * building.capacity)
     if razdel == 3:
         building = Factory(screen, position, f"Factory_{menu.number}")
+        building.workspace = int(menu.number ** 0.5 * building.workspace)
+        building.prise = int(menu.number ** 0.8 * building.workspace)
+        building.default_income = menu.number * building.default_income
     return building
 
 def save_game(screen):
@@ -83,8 +92,8 @@ def choose_class(name_of_class, screen):
             building = Cemetery(screen, [0, 0], "Dump")
         case "Church":
             building = Church(screen, [0, 0], "Dump")
-        case "Dump":
-            building = Dump(screen, [0, 0], "Dump")
+        case "Pump":
+            building = Pump(screen, [0, 0], "Pump")
         case "Factory":
             building = Factory(screen, [0, 0], "Dump")
         case "Firestation":
@@ -111,6 +120,8 @@ menu = Menu(screen)
 done = False
 screen.update_window()
 while not done:
+    if int(game.time) % 100 == 0:
+        screen.update_window()
     game.add_time()
     menu.update_menu()
     for event in pygame.event.get():
@@ -123,12 +134,15 @@ while not done:
             screen = Screen(game)
             load_game(screen)
             screen.update_window()
+            menu.screen = screen
+            menu.game = game
             menu.update_menu()
         if event.type == pygame.QUIT:
             done = True
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 3:
                 pygame.mouse.get_rel()
+                tmp_move = [0, 0]
                 screen.prev_x = -2
                 while pygame.mouse.get_pressed():
                     events = pygame.event.get()
@@ -138,7 +152,11 @@ while not done:
                         else:
                             moving = pygame.mouse.get_rel()
                             moving = screen.move(moving)
-                            screen.update_window()
+                            tmp_move[0] += moving[0]
+                            tmp_move[1] += moving[1]
+                            if(abs(tmp_move[0]) + abs(tmp_move[1]) > 5):
+                                screen.update_window()
+                                tmp_move = [0, 0]
                     game.add_time()
                     menu.update_menu()
             if event.button == 1:

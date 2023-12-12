@@ -50,6 +50,9 @@ class Menu(Screen):
         self.text_workspace = pygame.font.SysFont('Comic Sans MS', 15).render(" workspaces " + str(Game.workspace), False, (0, 0, 0))
         self.screen.window.blit(self.text_workspace, (800, self.pos[1] + 5))
 
+        self.text_income = pygame.font.SysFont('Comic Sans MS', 15).render(" Income " + str(int(Game.income_counter)), False, (0, 0, 0))
+        self.screen.window.blit(self.text_income, (700, self.pos[1] + 5))
+
         if Game.income_counter >= 0:
             good = pygame.image.load("./resources/positive_diffirence.png")
             self.screen.window.blit(good, (2, self.pos[1] + 5))
@@ -166,7 +169,7 @@ class Menu(Screen):
     # Параметры не требует
     # Возврата нет
     def init_images(self):
-        self.razdel[1] = 11
+        self.razdel[1] = 12
         self.razdel[2] = 10
         self.razdel[3] = 9
         self.images[1][1] = pygame.image.load(".\\resources\menus\\1_1.png")
