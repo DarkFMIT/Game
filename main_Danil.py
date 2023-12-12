@@ -90,6 +90,8 @@ def choose_class(name_of_class, screen):
             building = House(screen, [0, 0], "Dump")
         case "Cemetery":
             building = Cemetery(screen, [0, 0], "Dump")
+        case "Dump":
+            building = Dump(screen, [0, 0], "Pump")
         case "Church":
             building = Church(screen, [0, 0], "Dump")
         case "Pump":
