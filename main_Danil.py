@@ -52,7 +52,7 @@ def choose_build(razdel):
         building.capacity = int(menu.number ** 0.5 * building.capacity)
     if razdel == 3:
         building = Factory(screen, position, f"Factory_{menu.number}")
-        building.workspace = int(menu.number ** 0.5 * building.workspace)
+        building.workspace = 3 * int(menu.number ** 0.5 * building.workspace)
         building.prise = int(menu.number ** 0.8 * building.workspace)
         building.default_income = menu.number * building.default_income
     return building
