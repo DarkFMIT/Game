@@ -21,11 +21,11 @@ class House(Objects_for_build):
         icon = pygame.image.load(f".\\resources\\Buildings\{icon_name}.png")
         self.dopusc = [0, 2]
         self.dopusc_of_plate = 0
-        self.prise = 10000
+        self.prise = 500
         self.score = 100
         self.icon_name = icon_name
         self.capacity = 200
-        self.workspace = 3
+        self.workspace = 1
         self.default_income = -1
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)

@@ -48,11 +48,13 @@ def choose_build(razdel):
             building = Dump(screen, position, "Dump")
     if razdel == 2:
         building = House(screen, position, f"House_{menu.number}")
-        building.prise = menu.number * building.prise
-        building.capacity = menu.number * building.capacity
+        building.prise = int(menu.number ** 0.8 * building.prise)
+        building.capacity = int(menu.number ** 0.5 * building.capacity)
     if razdel == 3:
         building = Factory(screen, position, f"Factory_{menu.number}")
-        building.workspace = menu.number * building.workspace
+        building.workspace = 3 * int(menu.number ** 0.5 * building.workspace)
+        building.prise = int(menu.number ** 0.8 * building.workspace)
+        building.default_income = menu.number * building.default_income
     return building
 
 def save_game(screen):

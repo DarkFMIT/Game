@@ -73,7 +73,7 @@ class Game:
 
     income_counter = 0
 
-    salary = 4
+    salary = 1
 
     # Задача начальных параметров, котрые нужны при старте игры.
     # Параметры не требует
@@ -81,7 +81,7 @@ class Game:
     def __init__(self):
         self.prev = tm()
         self.time = 0
-        self.money = 1000000
+        self.money = 60000
         self.citizens = 0
         self.citizens_prev = 0
         self.available_capacity = 0
@@ -173,42 +173,88 @@ class Game:
 
 
     def adjusts_score(self):
+            # Больницы
             hospital_avaiability = self.citizens - Game.hospital_number * Game.hospital_capacity
+
+            # Церкви
             church_avaiability = self.citizens - Game.church_number * Game.church_capacity
+
+            # Полиция
             police_avaiability = self.citizens - Game.police_number * Game.police_capacity
+
+            # Пожарные станции
             firestation_avaiability = self.citizens - Game.firestation_number * Game.firestation_capacity
+
+            # Кладбища
             cemetery_avaiability = self.citizens - Game.cemetery_number * Game.cemetery_capacity
+
+            # Свалка
             dump_avaiability = self.citizens - Game.dump_number * Game.dump_capacity
+
+            # Школы
             school_avaiability = self.citizens - Game.school_number * Game.school_capacity
+
+            # Университеты
             university_avaiability = self.citizens - Game.university_number * Game.university_capacity
+
+            # Водокачка
             pump_avaiability = self.citizens - Game.pump_number * Game.pump_capacity
+
+            # Проверка больницы
+            # Не требует населения
             if (hospital_avaiability // Game.hospital_coeff > 0):
                 Game.score -= hospital_avaiability // Game.hospital_coeff
                 self.debuf_warning = image.load("./resources/Warnings/hospital.png")
-            elif (church_avaiability // Game.church_coeff > 0 and self.citizens > 10000):
+            
+            # Проверка церкви
+            # Требует 15.000 населения
+            elif (church_avaiability // Game.church_coeff > 0 and self.citizens > 15000):
                 Game.score -= church_avaiability // Game.church_coeff
                 self.debuf_warning = image.load("./resources/Warnings/Church.png")
-            elif (police_avaiability // Game.police_coeff > 0):
+
+            # Проверка полиции
+            # Требует 3.000 населения
+            elif (police_avaiability // Game.police_coeff > 0 and self.citizens > 3000):
                 Game.score -= police_avaiability // Game.police_coeff
                 self.debuf_warning = image.load("./resources/Warnings/Police.png")
-            elif (firestation_avaiability // Game.firestation_coeff > 0):
+
+            # Проверка пожарной станции
+            # Требует 8.000 населения
+            elif (firestation_avaiability // Game.firestation_coeff > 0 and self.citizens > 8000):
                 Game.score -= firestation_avaiability // Game.firestation_coeff
                 self.debuf_warning = image.load("./resources/Warnings/Firestation.png")
-            elif (cemetery_avaiability // Game.cemetery_coeff > 0):
+
+            # Проверка кладбища
+            # Требует 3.000 населения
+            elif (cemetery_avaiability // Game.cemetery_coeff > 0 and self.citizens > 3000):
                 Game.score -= cemetery_avaiability // Game.cemetery_coeff
                 self.debuf_warning = image.load("./resources/Warnings/Cemetery.png")
-            elif (school_avaiability // Game.school_coeff > 0):
+
+            # Проверка школы
+            # Требует 10.000 населения
+            elif (school_avaiability // Game.school_coeff > 0 and self.citizens > 10000):
                 Game.score -= school_avaiability // Game.school_coeff
                 self.debuf_warning = image.load("./resources/Warnings/School.png")
-            elif (dump_avaiability // Game.dump_coeff > 0):
+
+            # Проверка свалки
+            # Требует 3.000 населения
+            elif (dump_avaiability // Game.dump_coeff > 0 and self.citizens > 3000):
                 Game.score -= dump_avaiability // Game.dump_coeff
                 self.debuf_warning = image.load("./resources/Warnings/Dump.png")
+
+            # Проверка водокачки
+            # Не требует населения
             elif (pump_avaiability // Game.pump_coeff > 0):
                 Game.score -= pump_avaiability // Game.pump_coeff
                 self.debuf_warning = image.load("./resources/Warnings/Water.png")
-            elif (university_avaiability // Game.university_coeff > 0):
+
+            # Проверка универа
+            # Требует 20.000 населения
+            elif (university_avaiability // Game.university_coeff > 0 and self.citizens > 20000):
                 Game.score -= university_avaiability // Game.university_coeff
                 self.debuf_warning = image.load("./resources/Warnings/School.png")
+
+            # Если всё хорошо, то возвращаем деньги
             else:
                 self.debuf_warning = image.load("./resources/Warnings/empty.png")
                 buildings_score = 0

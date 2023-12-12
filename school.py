@@ -21,11 +21,11 @@ class School(Objects_for_build):
         icon = pygame.image.load(f".\\resources\\Buildings\{icon_name}.png")
         self.dopusc = [0, 2]
         self.dopusc_of_plate = 0
-        self.prise = 10000
+        self.prise = 1000
         self.score = 500
         self.icon_name = icon_name
         self.capacity = 0
-        self.workspace = 450
+        self.workspace = 10
         self.default_income = -200
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)

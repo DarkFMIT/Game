@@ -21,7 +21,7 @@ class President(Objects_for_build):
         icon = pygame.image.load(f".\\resources\\Buildings\{icon_name}.png")
         self.dopusc = [0, 2]
         self.dopusc_of_plate = 0
-        self.prise = 10000
+        self.prise = 40000
         self.score = 50000
         self.icon_name = icon_name
         self.capacity = 0
