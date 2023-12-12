@@ -9,7 +9,7 @@ from school import School
 from church import Church
 from police import Police
 from firestation import Firestation
-from menu_test import  Menu
+from menu import  Menu
 from hospital import Hospital
 from dump import Dump
 from president import President
@@ -32,6 +32,63 @@ def loading(screen):
     pygame.display.flip()
     zZz(3)
     waiting(screen)
+
+def start_menu(screen):
+    flag = False
+    previu = pygame.image.load("./resources/previu.png")
+    start_b = pygame.image.load("./resources/New_game.png")
+    continue_b =  pygame.image.load("./resources/Continue.png")
+    screen.window.blit(previu, (0, 0))
+    screen.window.blit(start_b, (377, 281))
+    screen.window.blit(continue_b, (377, 400))
+    pygame.display.flip()
+    while not flag:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return True
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    coords = pygame.mouse.get_pos()
+                    if (coords[0] >= 377) and (coords[0] <= 682):
+                        if (coords[1] >= 281) and (coords[1] <= 354):
+                            flag = True
+                        if (coords[1] >= 400) and (coords[1] <= 473):
+                            load_game(screen)
+                            waiting(screen)
+                            flag = True
+    return False
+
+def pause_menu(screen):
+    flag = False
+    previu = pygame.image.load("./resources/previu.png")
+    save_b = pygame.image.load("./resources/Save_b.png")
+    load_b =  pygame.image.load("./resources/Load.png")
+    quit_b =  pygame.image.load("./resources/Quit.png")
+    screen.window.blit(previu, (0, 0))
+    screen.window.blit(save_b, (435, 200))
+    screen.window.blit(load_b, (435, 300))
+    screen.window.blit(quit_b, (435, 400))
+    pygame.display.flip()
+    while not flag:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return True
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    coords = pygame.mouse.get_pos()
+                    if (coords[0] >= 435) and (coords[0] <= 625):
+                        if (coords[1] >= 200) and (coords[1] <= 274):
+                            save_game(screen)
+                            flag = True
+                        if (coords[1] >= 300) and (coords[1] <= 374):
+                            load_game(screen)
+                            waiting(screen)
+                            flag = True
+                        if (coords[1] >= 400) and (coords[1] <= 474):
+                            return True
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                flag = True
+    return False                                               
 
 def waiting(screen):
     previu = pygame.image.load("./resources/previu.png")
@@ -106,7 +163,6 @@ def load_game(screen):
         place_in_matrix = screen.get_romb(tmp_build)
         tmp_build[0] -= 60
         tmp_build[1] -= 170
-        print(place_in_matrix)
         screen.game.all_plates[place_in_matrix[0]][place_in_matrix[1]] = building
 
 

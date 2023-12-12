@@ -92,15 +92,6 @@ class Game:
             str = file.readline().split()
             for j in range(len(str)):
                 self.all_plates[i][j] = int(str[j])
-    
-    def __str__(self):
-        output = ""
-        output += str(self.time) + "|"
-        output += str(self.money) + "|"
-        output += str(self.citizens) + "|"
-        output += str(self.citizens_prev) + "|"
-        output += str(self.available_capacity)
-        return output
         
 
     # Добавляет время основываясь на раазнице компьютерного времени
@@ -292,5 +283,37 @@ class Game:
         self.citizens = int(list_atributes[2])
         self.citizens_prev = int(list_atributes[3])
         self.available_capacity = int(list_atributes[4])
-
+        Game.dump_number  = int(list_atributes[5])
+        Game.pump_number = int(list_atributes[6])
+        Game.house_number = int(list_atributes[7])
+        Game.church_number = int(list_atributes[8])
+        Game.police_number = int(list_atributes[9])
+        Game.school_number = int(list_atributes[10])
+        Game.factory_number = int(list_atributes[11])
+        Game.cemetery_number = int(list_atributes[12])
+        Game.hospital_number = int(list_atributes[13])
+        Game.president_number = int(list_atributes[14])
+        Game.university_number = int(list_atributes[15])
+        Game.firestation_number = int(list_atributes[16])
+    
+    def __str__(self):
+        output = ""
+        output += str(self.time) + "|"
+        output += str(self.money) + "|"
+        output += str(self.citizens) + "|"
+        output += str(self.citizens_prev) + "|"
+        output += str(self.available_capacity) + "|"
+        output += str(Game.dump_number) + "|"
+        output += str(Game.pump_number) + "|"
+        output += str(Game.house_number) + "|"
+        output += str(Game.church_number) + "|"
+        output += str(Game.police_number) + "|"
+        output += str(Game.school_number) + "|"
+        output += str(Game.factory_number) + "|"
+        output += str(Game.cemetery_number) + "|"
+        output += str(Game.hospital_number) + "|"
+        output += str(Game.president_number) + "|"
+        output += str(Game.university_number) + "|"
+        output += str(Game.firestation_number)
+        return output
 
