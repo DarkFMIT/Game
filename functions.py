@@ -16,6 +16,7 @@ from president import President
 from factory import Factory
 from pump import Pump
 import pygame
+from time import sleep as zZz
 pygame.font.init()
 
 def wheell(total_time):
@@ -26,6 +27,23 @@ def wheell(total_time):
             time += 1
 
 def loading(screen):
+    previu = pygame.image.load("./resources/previu.png")
+    screen.window.blit(previu, (0, 0))
+    pygame.display.flip()
+    zZz(3)
+    waiting(screen)
+
+def waiting(screen):
+    previu = pygame.image.load("./resources/previu.png")
+    repeat = wheell(162)
+    for i in repeat:
+        image = pygame.image.load(f"./loading/{i}.png") 
+        screen.window.blit(previu, (0, 0))
+        screen.window.blit(image, (281, 300))
+        zZz(0.1)
+        pygame.display.flip()
+
+
     
 
 def choose_build(menu, screen, position, razdel):

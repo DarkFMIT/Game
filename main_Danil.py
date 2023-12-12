@@ -1,26 +1,16 @@
 from game import Game
 from screen_opti import Screen
-from objects_for_build import Objects_for_build
 from house import House
 from road import Road
-from cemetery import Cemetery
-from university import University
-from school import School
-from church import Church
-from police import Police
-from firestation import Firestation
 from menu_test import  Menu
 from hospital import Hospital
-from dump import Dump
-from president import President
-from factory import Factory
-from pump import Pump
 import pygame
-from functions import choose_build, choose_class,save_game,load_game
+from functions import choose_build, save_game, load_game, loading, waiting
 pygame.font.init()
 
 game = Game()
 screen = Screen(game)
+loading(screen)
 menu = Menu(screen)
 done = False
 screen.update_window()
@@ -35,8 +25,8 @@ while not done:
         if event.type == pygame.KEYDOWN and event.key == pygame.K_F7:
             save_game(screen)
         if event.type == pygame.KEYDOWN and event.key == pygame.K_t:
+            waiting(screen)
             game = Game()
-            screen = Screen(game)
             load_game(screen)
             screen.update_window()
             menu.screen = screen

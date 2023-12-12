@@ -152,10 +152,8 @@ class Road(Objects_for_build):
         self.default_income = float(list_of_atributes[8])
         self.can = bool(list_of_atributes[9])
         tmp_coords = list_of_atributes[10]
-        print(tmp_coords)
         tmp_coords = tmp_coords.replace("[", "")
         tmp_coords = tmp_coords.replace(",", "")
         tmp_coords = tmp_coords.replace("]", "")
         tmp_coords = tmp_coords.split()
-        print(tmp_coords)
         self.points_for_build = [int(i) for i in tmp_coords]
