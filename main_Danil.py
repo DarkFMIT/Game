@@ -90,6 +90,8 @@ def choose_class(name_of_class, screen):
             building = House(screen, [0, 0], "Dump")
         case "Cemetery":
             building = Cemetery(screen, [0, 0], "Dump")
+        case "Dump":
+            building = Dump(screen, [0, 0], "Pump")
         case "Church":
             building = Church(screen, [0, 0], "Dump")
         case "Pump":
@@ -142,7 +144,6 @@ while not done:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 3:
                 pygame.mouse.get_rel()
-                tmp_move = [0, 0]
                 screen.prev_x = -2
                 while pygame.mouse.get_pressed():
                     events = pygame.event.get()
@@ -152,11 +153,7 @@ while not done:
                         else:
                             moving = pygame.mouse.get_rel()
                             moving = screen.move(moving)
-                            tmp_move[0] += moving[0]
-                            tmp_move[1] += moving[1]
-                            if(abs(tmp_move[0]) + abs(tmp_move[1]) > 5):
-                                screen.update_window()
-                                tmp_move = [0, 0]
+                            screen.update_window()
                     game.add_time()
                     menu.update_menu()
             if event.button == 1:
