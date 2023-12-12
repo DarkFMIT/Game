@@ -73,7 +73,7 @@ class Game:
 
     income_counter = 0
 
-    salary = 4
+    salary = 1
 
     # Задача начальных параметров, котрые нужны при старте игры.
     # Параметры не требует
@@ -81,7 +81,7 @@ class Game:
     def __init__(self):
         self.prev = tm()
         self.time = 0
-        self.money = 1000000
+        self.money = 60000
         self.citizens = 0
         self.citizens_prev = 0
         self.available_capacity = 0
@@ -173,12 +173,25 @@ class Game:
 
 
     def adjusts_score(self):
+            # Больницы
             hospital_avaiability = self.citizens - Game.hospital_number * Game.hospital_capacity
+
+            # Церкви
             church_avaiability = self.citizens - Game.church_number * Game.church_capacity
+
+            # Полиция
             police_avaiability = self.citizens - Game.police_number * Game.police_capacity
+
+            # Пожарные станции
             firestation_avaiability = self.citizens - Game.firestation_number * Game.firestation_capacity
+
+            # Кладбища
             cemetery_avaiability = self.citizens - Game.cemetery_number * Game.cemetery_capacity
+
+            # Свалка
             dump_avaiability = self.citizens - Game.dump_number * Game.dump_capacity
+
+            #
             school_avaiability = self.citizens - Game.school_number * Game.school_capacity
             university_avaiability = self.citizens - Game.university_number * Game.university_capacity
             pump_avaiability = self.citizens - Game.pump_number * Game.pump_capacity
@@ -188,7 +201,7 @@ class Game:
             elif (church_avaiability // Game.church_coeff > 0 and self.citizens > 10000):
                 Game.score -= church_avaiability // Game.church_coeff
                 self.debuf_warning = image.load("./resources/Warnings/Church.png")
-            elif (police_avaiability // Game.police_coeff > 0):
+            elif (police_avaiability // Game.police_coeff > 0 and self.citizens > 3000):
                 Game.score -= police_avaiability // Game.police_coeff
                 self.debuf_warning = image.load("./resources/Warnings/Police.png")
             elif (firestation_avaiability // Game.firestation_coeff > 0):

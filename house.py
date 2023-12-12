@@ -25,7 +25,7 @@ class House(Objects_for_build):
         self.score = 100
         self.icon_name = icon_name
         self.capacity = 200
-        self.workspace = 3
+        self.workspace = 1
         self.default_income = -1
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)

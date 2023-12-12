@@ -25,7 +25,7 @@ class Police(Objects_for_build):
         self.score = 500
         self.icon_name = icon_name
         self.capacity = 0
-        self.workspace = 15
+        self.workspace = 5
         self.default_income = -70
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)

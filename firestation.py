@@ -25,7 +25,7 @@ class Firestation(Objects_for_build):
         self.score = 500
         self.icon_name = icon_name
         self.capacity = 0
-        self.workspace = 20
+        self.workspace = 5
         self.default_income = -100
         super().__init__(screen, pos, icon)
         self.can = self.screen.can_build(self)
