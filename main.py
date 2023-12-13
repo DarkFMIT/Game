@@ -1,65 +1,44 @@
 from game import Game
 from screen_opti import Screen
-from objects_for_build import Objects_for_build
 from house import House
 from road import Road
-from cemetery import Cemetery
-from university import University
-from school import School
-from church import Church
-from police import Police
-from firestation import Firestation
-from menu_test import  Menu
+from menu import  Menu
 from hospital import Hospital
-from dump import Dump
-from president import President
-from factory import Factory
 import pygame
+from functions import choose_build, save_game, load_game, loading, waiting, start_menu, pause_menu
 pygame.font.init()
-
-def choose_build(razdel):
-    global menu, screen
-    if razdel == 1:
-        if menu.number == 1:
-            building = Cemetery(screen, position, "Cemetery")
-        if menu.number == 2:
-            building = Church(screen, position, "Church_1")
-        if menu.number == 3:
-            building = Church(screen, position, "Church_2")
-        if menu.number == 4:
-            building = Dump(screen, position, "Dump")
-        if menu.number == 5:
-            building = Firestation(screen, position, "Fire")
-        if menu.number == 6:
-            building = Hospital(screen, position, "Hospital")
-        if menu.number == 7:
-            building = Police(screen, position, "Police")
-        if menu.number == 8:
-            building = President(screen, position, "President")
-        if menu.number == 9:
-            building = School(screen, position, "School_1")
-        if menu.number == 10:
-            building = School(screen, position, "School_2")
-        if menu.number == 11:
-            building = University(screen, position, "University_vip")
-    if razdel == 2:
-        building = House(screen, position, f"House_{menu.number}")
-    if razdel == 3:
-        building = Factory(screen, position, f"Factory_{menu.number}")
-    return building
-
 
 game = Game()
 screen = Screen(game)
+loading(screen)
 menu = Menu(screen)
-done = False
+done = start_menu(screen)
+menu.screen = screen
+menu.game = game
 screen.update_window()
+game.pause_time()
 while not done:
+    if int(game.time) % 100 == 0:
+        screen.update_window()
     game.add_time()
     menu.update_menu()
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-            done = True
+            done = pause_menu(screen)
+            menu.screen = screen
+            menu.game = game
+            screen.update_window()
+            game.pause_time()
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_F7:
+            save_game(screen)
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_F8:
+            waiting(screen)
+            game = Game()
+            load_game(screen)
+            screen.update_window()
+            menu.screen = screen
+            menu.game = game
+            menu.update_menu()
         if event.type == pygame.QUIT:
             done = True
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -82,7 +61,7 @@ while not done:
                     if (screen.prev_x != -2):
                         menu.choose(event.pos, position)
                         if menu.flag:
-                            new_build = choose_build(menu.num_razd)
+                            new_build = choose_build(menu, screen, position, menu.num_razd)
                             new_build.buy()
                             screen.update_window()
                             menu.update_menu()

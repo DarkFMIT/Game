@@ -42,16 +42,16 @@ class Menu(Screen):
         self.screen.window.blit(self.text_citizens, (100, self.pos[1] + 5))
 
         self.text_available_capacity = pygame.font.SysFont('Comic Sans MS', 15).render(" capacity " + str(self.screen.game.available_capacity), False, (0, 0, 0))
-        self.screen.window.blit(self.text_available_capacity, (200, self.pos[1] + 5))
+        self.screen.window.blit(self.text_available_capacity, (220, self.pos[1] + 5))
 
-        self.text_score = pygame.font.SysFont('Comic Sans MS', 15).render(" score " + str(Game.score), False, (0, 0, 0))
-        self.screen.window.blit(self.text_score, (300, self.pos[1] + 5))
+        # self.text_score = pygame.font.SysFont('Comic Sans MS', 15).render(" score " + str(Game.score), False, (0, 0, 0))
+        # self.screen.window.blit(self.text_score, (300, self.pos[1] + 5))
 
         self.text_workspace = pygame.font.SysFont('Comic Sans MS', 15).render(" workspaces " + str(Game.workspace), False, (0, 0, 0))
         self.screen.window.blit(self.text_workspace, (800, self.pos[1] + 5))
 
         self.text_income = pygame.font.SysFont('Comic Sans MS', 15).render(" Income " + str(int(Game.income_counter)), False, (0, 0, 0))
-        self.screen.window.blit(self.text_income, (700, self.pos[1] + 5))
+        self.screen.window.blit(self.text_income, (650, self.pos[1] + 5))
 
         if Game.income_counter >= 0:
             good = pygame.image.load("./resources/positive_diffirence.png")
@@ -172,12 +172,12 @@ class Menu(Screen):
         self.razdel[1] = 12
         self.razdel[2] = 10
         self.razdel[3] = 9
-        self.images[1][1] = pygame.image.load(".\\resources\menus\\1_1.png")
-        self.images[1][2] = pygame.image.load(".\\resources\menus\\1_2.png")
-        self.images[1][3] = pygame.image.load(".\\resources\menus\\1_3.png")
-        self.images[2][1] = pygame.image.load(".\\resources\menus\\2_1.png")
-        self.images[2][2] = pygame.image.load(".\\resources\menus\\2_2.png")
-        self.images[2][3] = pygame.image.load(".\\resources\menus\\2_3.png")
-        self.images[3][1] = pygame.image.load(".\\resources\menus\\3_1.png")
-        self.images[3][2] = pygame.image.load(".\\resources\menus\\3_2.png")
-        self.images[3][3] = pygame.image.load(".\\resources\menus\\3_3.png")  
+        self.images[1][1] = pygame.image.load(".\\resources\Menus\\1_1.png")
+        self.images[1][2] = pygame.image.load(".\\resources\Menus\\1_2.png")
+        self.images[1][3] = pygame.image.load(".\\resources\Menus\\1_3.png")
+        self.images[2][1] = pygame.image.load(".\\resources\Menus\\2_1.png")
+        self.images[2][2] = pygame.image.load(".\\resources\Menus\\2_2.png")
+        self.images[2][3] = pygame.image.load(".\\resources\Menus\\2_3.png")
+        self.images[3][1] = pygame.image.load(".\\resources\Menus\\3_1.png")
+        self.images[3][2] = pygame.image.load(".\\resources\Menus\\3_2.png")
+        self.images[3][3] = pygame.image.load(".\\resources\Menus\\3_3.png")  
