@@ -150,6 +150,8 @@ def save_game(screen):
                     file.write(str(screen.game.all_plates[i][j]) + "\n")
 
 def load_game(screen):
+    game = Game()
+    screen.game = game
     with open("./resources/Save/save", "rt") as file:
         list_save = file.readlines()
     screen.game.load(list_save[0])

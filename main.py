@@ -26,6 +26,7 @@ while not done:
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             done = pause_menu(screen)
             menu.screen = screen
+            game = screen.game
             menu.game = game
             screen.update_window()
             game.pause_time()
